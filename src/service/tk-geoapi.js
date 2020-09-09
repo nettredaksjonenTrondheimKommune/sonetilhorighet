@@ -22,21 +22,22 @@ export default async function finnSoner(adresse, dispatch = noop) {
     ];
 
     try {
-        console.log("Hei");
+        console.log("Hei fra try");
         const results = await Promise.all(promises);
         console.log(results);
-        const [soner, bydelTreff, helsestasjonTreff] = results;
-        dispatch(reportFetchSuccess(SERVICE_NAME));
-
-        return [
-            // barneskole(soner),
-            // bydel(bydelTreff),
-            // helsesone(soner),
-            helsestasjon(helsestasjonTreff),
-            console.log(helsestasjon(helsestasjonTreff))
-            // ungdomsskole(soner),
-            // valgkrets(soner),
-        ];
+        if(results.length !== null) {
+            const [soner, bydelTreff, helsestasjonTreff] = results;
+            dispatch(reportFetchSuccess(SERVICE_NAME));
+    
+            return [
+                // barneskole(soner),
+                // bydel(bydelTreff),
+                // helsesone(soner),
+                helsestasjon(helsestasjonTreff),
+                // ungdomsskole(soner),
+                // valgkrets(soner),
+            ];
+        }
     } catch (error) {
         dispatch(reportFetchError(SERVICE_NAME, error));
     }
@@ -59,12 +60,16 @@ async function fetchAndSelect(adresse, endpoint) {
     treff = treff || adresser.find((a) => leven(a.adresse, adresseLower) <= 2);
 
     if (!treff) {
-        if (adresse.match(/ [0-9]/) !== null) {
-            return fetchAndSelect(adresse.replace(/ [0-9]+.?/, ''), endpoint);
-        }
-        throw new Error(`No results for ${adresse}, got response ${JSON.stringify(document, null, 2)}`);
+        treff = null;
     }
-    console.log(treff);
+
+    // if (!treff) {
+    //     if (adresse.match(/ [0-9]/) !== null) {
+    //         return fetchAndSelect(adresse.replace(/ [0-9]+.?/, ''), endpoint);
+    //     }
+    //     throw new Error(`No results for ${adresse}, got response ${JSON.stringify(document, null, 2)}`);
+    // }
+
     return treff;
 }
 
