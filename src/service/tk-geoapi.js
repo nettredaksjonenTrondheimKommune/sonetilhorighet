@@ -22,10 +22,9 @@ export default async function finnSoner(adresse, dispatch = noop) {
     ];
 
     try {
-        console.log("Hei fra try");
         const results = await Promise.all(promises);
-        console.log(results);
-        if(results.length !== null) {
+
+        if(results[2] !== null) {
             const [soner, bydelTreff, helsestasjonTreff] = results;
             dispatch(reportFetchSuccess(SERVICE_NAME));
     
@@ -44,10 +43,6 @@ export default async function finnSoner(adresse, dispatch = noop) {
 }
 
 async function fetchAndSelect(adresse, endpoint) {
-    if (adresse === '') {
-        throw new Error('Invalid adress');
-    }
-
     const adresseLower = adresse.toLowerCase();
     const url = `${BASE_URL + endpoint}/${encodeURIComponent(adresse)}`;
     const document = await fetchJSON(url, { headers: AUTH_HEADER });

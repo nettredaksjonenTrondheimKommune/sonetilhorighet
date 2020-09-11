@@ -17,8 +17,8 @@ code {
   margin: auto;
 }
 
-.box.bg-blue {
-  background: #c3d9e9;
+.box.bg-blue-light {
+  background: #e9f1f7;
 }
 
 .box[class*=bg-] {
@@ -28,22 +28,18 @@ code {
 
 .underline {
   text-decoration: underline;
+  color: #055fa5;
 }
 
 .knapp {
-  margin-left: 15px;
-  padding: 0 20px;
-  border-radius: 0;
-  border: 4px solid #002c54;
-  box-shadow: #dedede;
-  z-index: 10;
-  background-color: #dedede;
+  margin-left: 20px !important;
+  padding: 2px 20px !important;
+  border: 3px solid #002c54 !important;
+  box-shadow: #dedede !important;
+  z-index: 10 !important;
+  background-color: #dedede !important;
 }
 
-.form-control {
-  border-radius: 0px !important;
-}
-
-.btn {
-  padding: 1px 0 !important;
+.langInput {
+  padding-right: 150px !important;
 }
