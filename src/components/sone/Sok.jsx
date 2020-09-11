@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Sonetilhorighet from './Sonetilhorighet';
 import finnSoner from '../../service/tk-geoapi.js';
 import translations from './translations.json';
 import getTranslate from '../../service/translate';
+import './customStyle.css';
 
 const defaultState = {
     resultater: [],
@@ -45,6 +45,7 @@ export default class Sok extends Component {
             visHelsestasjon: false,
             visFinnerIkkeAdresse: false
         });
+
         if (adresse === '') {
             return;
         }
@@ -80,16 +81,23 @@ export default class Sok extends Component {
                     <form className="form-inline" onSubmit={this.handtereSok}>
                         <div className="form-group">
                             <input
-                                className="form-control langInput"
+                                className="form-control"
                                 aria-label="Skriv inn gatenavn"
                                 type="text"
                                 name="adresse"
                                 placeholder="Skriv inn gatenavn"
-                                ref={node => (this.inputNode = node)} 
+                                ref={node => (this.inputNode = node)}
+                                style="padding-right: 150px !important;"
                             />
                         </div>
                         <div className="form-group">
-                            <button className="btn knapp" type="submit">Søk</button>
+                            <button className="btn" type="submit" style="margin-left: 20px !important;
+                                padding: 3px 20px !important;
+                                border: 3px solid #002c54 !important;
+                                z-index: 10 !important;
+                                background-color: #dedede !important;">
+                                    Søk
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -98,7 +106,7 @@ export default class Sok extends Component {
                     this.state.visHelsestasjon &&
                     <div className="box bg-blue-light">
                         <h4>
-                            <a className="underline" href={resultat.lenke}>{resultat.verdi}</a>
+                            <a style="text-decoration: underline; color: #055fa5;" href={resultat.lenke}>{resultat.verdi}</a>
                         </h4>
                     </div>
                 }

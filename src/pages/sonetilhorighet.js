@@ -1,24 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; // eslint-disable-line
 import App from '../App';
+import '../components/sone/styles.css';
 
-import SoneTilhorighet from '../components/sone/SoneTilhorighet';
+import Sok from '../components/sone/Sok';
 
 // eslint-disable-next-line react/jsx-filename-extension
 ReactDOM.render(
   <App
     renderHeader={() => (
-      <>
-      <h1>Nærområde</h1>
-      <h2>Finn sonetilhørighet for adresse</h2>
-      </>
+      <></>
     )}
     renderChildren={(adresse) => (
-      <>
-        <h3>{adresse}</h3>
-
-        <SoneTilhorighet adresse={adresse} />
-      </>
+      <Sok />
     )}
   />,
   document.getElementById('tk-sonetilhorighet'),

@@ -16,12 +16,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    
-    "build": "run-s clean build:pages build:zip",
+    "build": "run-s clean build:pages",
     "build:pages": "rollup -c",
     "build:zip": "node make-zip.js",
     "clean": "rimraf sonetilhorighet",
-
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

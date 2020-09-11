@@ -16,30 +16,3 @@ code {
   max-width: 500px;
   margin: auto;
 }
-
-.box.bg-blue-light {
-  background: #e9f1f7;
-}
-
-.box[class*=bg-] {
-  padding: 30px;
-  margin-top: 30px;
-}
-
-.underline {
-  text-decoration: underline;
-  color: #055fa5;
-}
-
-.knapp {
-  margin-left: 20px !important;
-  padding: 2px 20px !important;
-  border: 3px solid #002c54 !important;
-  box-shadow: #dedede !important;
-  z-index: 10 !important;
-  background-color: #dedede !important;
-}
-
-.langInput {
-  padding-right: 150px !important;
-}
