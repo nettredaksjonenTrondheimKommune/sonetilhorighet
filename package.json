@@ -6,14 +6,22 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^3.4.1",
+    "npm-run-all": "^4.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.26.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    
+    "build": "run-s clean build:pages build:zip",
+    "build:pages": "rollup -c",
+    "build:zip": "node make-zip.js",
+    "clean": "rimraf sonetilhorighet",
+
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -31,5 +39,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.3.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
