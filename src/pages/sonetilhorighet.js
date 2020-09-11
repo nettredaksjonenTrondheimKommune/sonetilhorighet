@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; // eslint-disable-line
 import App from '../App';
-import '../components/sone/styles.css';
+import '../components/sone/customStyle.css';
 
 import Sok from '../components/sone/Sok';
 
@@ -11,7 +11,7 @@ ReactDOM.render(
     renderHeader={() => (
       <></>
     )}
-    renderChildren={(adresse) => (
+    renderChildren={() => (
       <Sok />
     )}
   />,

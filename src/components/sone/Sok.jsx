@@ -74,10 +74,24 @@ export default class Sok extends Component {
     render() {
         const { resultater: resultat } = this.state;
 
+        const knapp = {
+            marginLeft: "20px",
+            padding: "2px 20px",
+            border: "3px solid #002c54",
+            backgroundColor: "#dedede"
+        };
+
+        const underline = {
+            textDecoration: "underline",
+            color: "#055fa5"
+        };
+
+        const langInput = {
+            paddingRight: "150px"
+        };
+
         return (
             <div className="content">
-                <div>
-                    <h3>Finn din helsestasjon</h3>
                     <form className="form-inline" onSubmit={this.handtereSok}>
                         <div className="form-group">
                             <input
@@ -87,26 +101,21 @@ export default class Sok extends Component {
                                 name="adresse"
                                 placeholder="Skriv inn gatenavn"
                                 ref={node => (this.inputNode = node)}
-                                style="padding-right: 150px !important;"
+                                style={langInput}
                             />
                         </div>
                         <div className="form-group">
-                            <button className="btn" type="submit" style="margin-left: 20px !important;
-                                padding: 3px 20px !important;
-                                border: 3px solid #002c54 !important;
-                                z-index: 10 !important;
-                                background-color: #dedede !important;">
+                            <button className="btn" type="submit" style={knapp}>
                                     Søk
                             </button>
                         </div>
                     </form>
-                </div>
 
                 {
                     this.state.visHelsestasjon &&
                     <div className="box bg-blue-light">
                         <h4>
-                            <a style="text-decoration: underline; color: #055fa5;" href={resultat.lenke}>{resultat.verdi}</a>
+                            <a style={underline} href={resultat.lenke}>{resultat.verdi}</a>
                         </h4>
                     </div>
                 }
