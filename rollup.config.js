@@ -7,11 +7,6 @@ import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
-//import { patchMaterialUIExports, copyHTML } from './rollup.scripts';
-
-//patchMaterialUIExports();
-//copyHTML();
-
 const plugins = [
   babel({
     exclude: 'node_modules/**',
