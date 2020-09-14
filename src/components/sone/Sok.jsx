@@ -92,7 +92,7 @@ export default class Sok extends Component {
 
         return (
             <div className="content">
-                    <form className="form-inline" onSubmit={this.handtereSok}>
+                    <form className="form-inline box bg-blue-light" onSubmit={this.handtereSok}>
                         <div className="form-group">
                             <input
                                 className="form-control"
@@ -124,7 +124,7 @@ export default class Sok extends Component {
                     this.state.visFinnerIkkeAdresse &&
                     <div className="box bg-blue-light">
                         <h4>
-                            Vi finner ikke adressen du søker etter. Har du for eksempel skrevet vei istedet for veg?
+                            Vi finner ikke adressen du søker etter. Har du skrevet vei istedet for veg?
                         </h4>
                     </div>
                 }
