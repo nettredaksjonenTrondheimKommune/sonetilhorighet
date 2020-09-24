@@ -16,54 +16,60 @@ const noop = () => { };
 export default async function finnSoner(adresse, dispatch = noop) {
     dispatch(reportFetchRequest(SERVICE_NAME));
     const promises = [
-        fetchAndSelect(adresse, 'adresserkretser'),
-        fetchAndSelect(adresse, 'finnbydel'),
+        // fetchAndSelect(adresse, 'adresserkretser'),
+        // fetchAndSelect(adresse, 'finnbydel'),
         fetchAndSelect(adresse, 'finnhelsestasjon')
     ];
 
     try {
         const results = await Promise.all(promises);
+        const [helsestasjonTreff] = results;
+        dispatch(reportFetchSuccess(SERVICE_NAME));
 
-        if(results[2] !== null) {
-            const [soner, bydelTreff, helsestasjonTreff] = results;
-            dispatch(reportFetchSuccess(SERVICE_NAME));
-    
+        if(results[0].adresse === adresse) {
             return [
-                // barneskole(soner),
-                // bydel(bydelTreff),
-                // helsesone(soner),
                 helsestasjon(helsestasjonTreff),
-                // ungdomsskole(soner),
-                // valgkrets(soner),
             ];
+        } else {
+            return results;
         }
+
+        // if(results[2] !== null) {
+        //     const [soner, bydelTreff, helsestasjonTreff] = results;
+        //     dispatch(reportFetchSuccess(SERVICE_NAME));
+    
+        //     return [
+        //         barneskole(soner),
+        //         bydel(bydelTreff),
+        //         helsesone(soner),
+        //         helsestasjon(helsestasjonTreff),
+        //         ungdomsskole(soner),
+        //         valgkrets(soner)
+        //     ];
+        // }
     } catch (error) {
         dispatch(reportFetchError(SERVICE_NAME, error));
     }
 }
 
 async function fetchAndSelect(adresse, endpoint) {
-    const adresseLower = adresse.toLowerCase();
     const url = `${BASE_URL + endpoint}/${encodeURIComponent(adresse)}`;
     const document = await fetchJSON(url, { headers: AUTH_HEADER });
     const adresser = (document.result || []).map((a) => ({
         ...a,
         adresse: a.adresse.toLowerCase(),
     }));
-    let treff = adresser.find((a) => a.adresse === adresseLower);
-    treff = treff || adresser.find((a) => a.adresse.startsWith(adresseLower));
-    treff = treff || adresser.find((a) => leven(a.adresse, adresseLower) <= 2);
+    let treff = adresser.find((a) => a.adresse === adresse);
+    treff = treff || adresser.find((a) => a.adresse.startsWith(adresse));
+    treff = treff || adresser.find((a) => leven(a.adresse, adresse) <= 2);
 
-    if (!treff) {
-        treff = null;
+    if(typeof treff === 'undefined') {
+        treff = {adresse: "Finner du ikke adressen din? Prøv å endre skrivemåte, for eksempel på veg/vei?", navn: "", verdi: "", lenke: ""};
+    } else {
+        if(treff.adresse !== adresse) {
+            treff = {adresse: "Har du husket å skrive gatenummer og eventuelt bokstav?", navn: "", verdi: "", lenke: ""};
+        }
     }
-
-    // if (!treff) {
-    //     if (adresse.match(/ [0-9]/) !== null) {
-    //         return fetchAndSelect(adresse.replace(/ [0-9]+.?/, ''), endpoint);
-    //     }
-    //     throw new Error(`No results for ${adresse}, got response ${JSON.stringify(document, null, 2)}`);
-    // }
 
     return treff;
 }
@@ -191,6 +197,7 @@ async function fetchAndSelect(adresse, endpoint) {
  * }
  */
 function helsestasjon(treff) {
+    const adresse = treff.adresse;
     const navn = `${treff.helsestasjonsonenavn} helsestasjon`;
     const normalisertNavn = navn
         .toLowerCase()
@@ -202,6 +209,7 @@ function helsestasjon(treff) {
     const lenke = `https://trondheim.kommune.no/${normalisertNavn}`;
 
     return {
+        adresse: adresse,
         navn: 'helsestasjon',
         verdi: navn,
         lenke,

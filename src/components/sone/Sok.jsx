@@ -8,9 +8,9 @@ import './customStyle.css';
 const defaultState = {
     resultater: [],
     adresse: '',
-    udefinert: '',
     visHelsestasjon: false,
-    visFinnerIkkeAdresse: false
+    visFinnerIkkeAdresse: false,
+    finnerIkkeAdresse: ''
 };
 export default class Sok extends Component {
     constructor(props) {
@@ -41,26 +41,37 @@ export default class Sok extends Component {
     // }
 
     async sokEtterHelsestasjon(adresse) {
+        const adresseLower = adresse.toLowerCase();
         this.setState({
             visHelsestasjon: false,
-            visFinnerIkkeAdresse: false
+            visFinnerIkkeAdresse: false,
+            finnerIkkeAdresse: ''
         });
 
-        if (adresse === '') {
+        if (adresseLower === '') {
             return;
         }
 
         const { dispatch } = this.props;
-        const response = await finnSoner(adresse, dispatch);
+        const response = await finnSoner(adresseLower, dispatch);
+        console.log(response);
 
-        if (typeof response !== 'undefined') {
-            this.state.resultater = response[0];
+        if(response[0].adresse === adresseLower) {
+            if(adresseLower === response[0].adresse) {
+                this.state.resultater = response[0];
+                this.setState({
+                    visHelsestasjon: true
+                });
+            }
+        } else if (response[0].adresse === "Vi finner ikke adressen du søker") {
             this.setState({
-                visHelsestasjon: true
+                visFinnerIkkeAdresse: true,
+                finnerIkkeAdresse: response[0].adresse
             });
         } else {
             this.setState({
-                visFinnerIkkeAdresse: true
+                visFinnerIkkeAdresse: true,
+                finnerIkkeAdresse: response[0].adresse
             });
         }
     };
@@ -92,24 +103,24 @@ export default class Sok extends Component {
 
         return (
             <div className="content">
-                    <form className="form-inline box bg-blue-light" onSubmit={this.handtereSok}>
-                        <div className="form-group">
-                            <input
-                                className="form-control"
-                                aria-label="Skriv inn gatenavn"
-                                type="text"
-                                name="adresse"
-                                placeholder="Skriv inn gatenavn"
-                                ref={node => (this.inputNode = node)}
-                                style={langInput}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <button className="btn" type="submit" style={knapp}>
-                                    Søk
-                            </button>
-                        </div>
-                    </form>
+                <form className="form-inline box bg-blue-light" onSubmit={this.handtereSok}>
+                    <div className="form-group">
+                        <input
+                            className="form-control"
+                            aria-label="Skriv inn gatenavn"
+                            type="text"
+                            name="adresse"
+                            placeholder="Skriv inn gatenavn"
+                            ref={node => (this.inputNode = node)}
+                            style={langInput}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <button className="btn" type="submit" style={knapp}>
+                            Søk
+                        </button>
+                    </div>
+                </form>
 
                 {
                     this.state.visHelsestasjon &&
@@ -124,7 +135,7 @@ export default class Sok extends Component {
                     this.state.visFinnerIkkeAdresse &&
                     <div className="box bg-blue-light">
                         <h4>
-                            Vi finner ikke adressen du søker etter. Har du skrevet vei istedet for veg?
+                            {this.state.finnerIkkeAdresse}
                         </h4>
                     </div>
                 }
