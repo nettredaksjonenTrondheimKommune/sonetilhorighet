@@ -4,29 +4,70 @@ import finnSoner from '../../service/tk-geoapi.js';
 import translations from './translations.json';
 import getTranslate from '../../service/translate';
 import './customStyle.css';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import { fetchJSON } from '../../service/fetchJSON.js';
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import '../../../node_modules/react-bootstrap-typeahead/css/Typeahead.css';
+
+const AUTH_HEADER = {
+    'X-API-KEY': 'oz4_500oOHb-vbI6ib8-nFlexij68-C-KOXEMkFALy4=',
+};
+const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse/finnhelsestasjon';
+const PER_PAGE = 50;
+
+async function hentAdresser(adresse) {
+    const url = `${BASE_URL}/${encodeURIComponent(adresse)}`;
+
+    return fetchJSON(url, { headers: AUTH_HEADER })
+        .then((items, total_count) => {
+            const alleAdresser = items.result.map((res, i = 0 + 1) => ({
+                id: i,
+                adresse: res.adresse,
+                helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
+                lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
+                    .toLowerCase()
+                    .replace(/[^a-zæøå]/g, '-')
+                    .replace(/æ/g, 'a')
+                    .replace(/ø/g, 'o')
+                    .replace(/å/g, 'a')
+            }));
+            console.log(alleAdresser);
+            console.log(alleAdresser[0].adresse);
+            console.log(adresse);
+            const adresser = alleAdresser.map((res) => ({
+                adresse: res.adresse
+            }))
+            console.log(adresser);
+            return { alleAdresser, total_count };
+        });
+}
 
 const defaultState = {
     resultater: [],
-    adresse: '',
-    visHelsestasjon: false,
+    // visHelsestasjon: false,
     visFinnerIkkeAdresse: false,
-    finnerIkkeAdresse: ''
+    finnerIkkeAdresse: '',
+    // alleAdresser: [],
+    // adresse: '',
+    // isLoading: false,
 };
+
 export default class Sok extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ...defaultState
-        }
-
-        this.updateSoner = this.sokEtterHelsestasjon.bind(this);
-        this.handtereSok = this.handtereSok.bind(this);
+    state = {
+        ...defaultState,
+        isLoading: false,
+        alleAdresser: [],
+        visHelsestasjon: false,
+        adresse: ''
     }
+    _cache = {};
 
-    // componentDidMount() {
-    //     this._ismounted = true;
-    //     this.updateSoner(this.props.adresse);
-    // }
+    componentDidMount() {
+        // await this.hentAdresser();
+        // this._ismounted = true;
+        // this.updateSoner(this.props.adresse);
+    }
 
     // componentWillUnmount() {
     //     this._ismounted = false;
@@ -54,7 +95,6 @@ export default class Sok extends Component {
 
         const { dispatch } = this.props;
         const response = await finnSoner(adresseLower, dispatch);
-        console.log(response);
 
         if(response[0].adresse === adresseLower) {
             if(adresseLower === response[0].adresse) {
@@ -82,8 +122,53 @@ export default class Sok extends Component {
         this.sokEtterHelsestasjon(this.adresse);
     }
 
+    _handleInputChange = adresse => {
+        this.setState({ adresse });
+    };
+
+    _handlePagination = (e, shownResults) => {
+        const { adresse } = this.state;
+        const cachedQuery = this._cache[adresse];
+
+        if (
+            cachedQuery.alleAdresser.length > shownResults ||
+            cachedQuery.alleAdresser.length === cachedQuery.total_count
+        ) {
+            return;
+        }
+
+        this.setState({ isLoading: true });
+
+        const page = cachedQuery.page + 1;
+
+        hentAdresser(adresse, page).then(resp => {
+            const alleAdresser = cachedQuery.alleAdresser.concat(resp.alleAdresser);
+            this._cache[adresse] = { ...cachedQuery, alleAdresser, page };
+            this.setState({
+                isLoading: false,
+                alleAdresser
+            });
+        });
+    };
+
+    _handleSearch = adresse => {
+        if (this._cache[adresse]) {
+            this.setState({ alleAdresser: this._cache[adresse].alleAdresser });
+            return;
+        }
+
+        this.setState({ isLoading: true });
+        hentAdresser(adresse).then(resp => {
+            this._cache[adresse] = { ...resp, page: 1 };
+            this.setState({
+                isLoading: false,
+                alleAdresser: resp.alleAdresser
+            });
+        });
+    };
+
     render() {
-        const { resultater: resultat } = this.state;
+        const { resultater: resultat, alleAdresser: alleAdresser } = this.state;
 
         const knapp = {
             marginLeft: "20px",
@@ -103,7 +188,41 @@ export default class Sok extends Component {
 
         return (
             <div className="content">
-                <form className="form-inline box bg-blue-light" onSubmit={this.handtereSok}>
+                <div className="form-inline box bg-blue-light">
+                    <AsyncTypeahead
+                        {...this.state}
+                        id="sokAdresse"
+                        labelKey="adresse"
+                        maxResults={PER_PAGE - 1}
+                        minLength={1}
+                        onInputChange={this._handleInputChange}
+                        onPaginate={this._handlePagination}
+                        onSearch={this._handleSearch}
+                        options={alleAdresser}
+                        paginate
+                        placeholder="Skriv inn gatenavn"
+                        align="justify"
+                        renderMenuItemChildren={option => (
+                            <React.Fragment>
+                                <div key={option.id}>
+                                    <span>{option.adresse}</span>
+                                </div>
+                            </React.Fragment>
+                        )}
+                        useCache={false}
+                    />
+                </div>
+
+                {
+                    this.state.visHelsestasjon &&
+                    <div className="box bg-blue-light">
+                        <h4>
+                            <a style={underline} href={resultat.lenke}>{resultat.verdi}</a>
+                        </h4>
+                    </div>
+                }
+
+                {/* <form className="form-inline box bg-blue-light" onSubmit={this.handtereSok}>
                     <div className="form-group">
                         <input
                             className="form-control"
@@ -138,7 +257,7 @@ export default class Sok extends Component {
                             {this.state.finnerIkkeAdresse}
                         </h4>
                     </div>
-                }
+                } */}
             </div>
         )
     }

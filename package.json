@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^3.4.1",
     "react": "^16.13.1",
+    "react-bootstrap-typeahead": "^4.2.3",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-search-autocomplete": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
