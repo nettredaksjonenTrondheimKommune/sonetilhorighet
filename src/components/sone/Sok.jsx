@@ -19,6 +19,7 @@ export default class Sok extends Component {
         this.state = {
             value: '',
             adresseforslag: [],
+            ingenAdresseforslag: false,
             info: {},
             visHelsestasjon: false,
             alleAdresser: []
@@ -66,23 +67,16 @@ export default class Sok extends Component {
         return litenListe;
     }
 
+    escapeRegexCharacters(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
     finnAdresserSomStarterMed(liste, key, adresse) {
-        adresse = adresse[0].toUpperCase() + adresse.slice(1);
+        var forventetVerdi = this.escapeRegexCharacters(adresse.trim());
+        forventetVerdi = forventetVerdi.toLowerCase();
+        const regex = new RegExp('^' + forventetVerdi, 'i');
 
-        if(!isNaN(adresse[adresse.length-2])) {
-            adresse = adresse.slice(0, -1) + adresse.slice(-1).toUpperCase();
-        }
-
-        let starterMedListe = [];
-        for(var i = 0; i < liste.length; i++) {
-            if (liste[i][key].startsWith(adresse)) {
-                starterMedListe.push(liste[i]);
-            }
-        }
-
-        starterMedListe = this.litenListe(starterMedListe);
-
-        return starterMedListe;
+        return liste.filter(res => regex.test(res.adresse));
     }
 
     getSuggestions = async (value) => {
@@ -136,8 +130,13 @@ export default class Sok extends Component {
     };
 
     onSuggestionsFetchRequested = async ({ value }) => {
+        const adresseforslag =  this.finnAdresserSomStarterMed(this.state.alleAdresser, "adresse", value);
+        const isInputBlank = value.trim() === '';
+        const ingenAdresseforslag = !isInputBlank && adresseforslag.length === 0;
+
         this.setState({
-            adresseforslag: this.finnAdresserSomStarterMed(this.state.alleAdresser, "adresse", value)
+            adresseforslag,
+            ingenAdresseforslag
         });
     };
 
@@ -148,7 +147,7 @@ export default class Sok extends Component {
     };
 
     render() {
-        const { value, adresseforslag, info, visHelsestasjon } = this.state;
+        const { value, adresseforslag, ingenAdresseforslag, info, visHelsestasjon } = this.state;
 
         const inputProps = {
             placeholder: "Skriv inn adresse",
@@ -168,12 +167,19 @@ export default class Sok extends Component {
                         onSuggestionSelected={this.onSuggestionSelected}
                         inputProps={inputProps}
                     />
+
+                    {
+                        ingenAdresseforslag &&
+                        <div className="no-suggestions">
+                            Vi finner ikke adressen
+                        </div>
+                    }
                 </div>
 
                 {
                     visHelsestasjon &&
                     <div className="box bg-blue-light">
-                        <h4>
+                        <h4 className="senter">
                             <a className="understrek" href={info.lenke}>{info.helsestasjonsonenavn}</a>
                         </h4>
                     </div>

@@ -1,12 +1,11 @@
 .box.bg-blue-light {
   background: #e9f1f7;
-  height: 100px;
+  height: 130px;
 }
   
 .box[class*=bg-] {
-  padding: 30px;
+  padding: 50px;
   margin-top: 30px;
-  text-align: center;
 }
 
 .react-autosuggest__container {
@@ -71,9 +70,19 @@
   background-color: #ddd;
 }
 
+.no-suggestions {
+  margin-top: 10px;
+  padding-left: 50px;
+  text-align: left;
+}
+
 .understrek {
   text-decoration: underline;
   color: #055fa5;
+}
+
+.senter {
+  text-align: center;
 }
 
 /* .knapp {
