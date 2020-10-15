@@ -18,7 +18,7 @@ export default class Sok extends Component {
 
         this.state = {
             value: '',
-            suggestions: [],
+            adresseforslag: [],
             info: {},
             visHelsestasjon: false,
             alleAdresser: []
@@ -31,10 +31,10 @@ export default class Sok extends Component {
 
     hentAdresser = async () => {
         const url = `${BASE_URL}/adresser?limit=55000`;
-        const document = await fetchJSON(url, { headers: AUTH_HEADER });
+        const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
 
         this.setState({
-            alleAdresser: (document.result || []).map((res) => ({
+            alleAdresser: (dokument.result || []).map((res) => ({
                 adresse: res.gatenavn + " " + res.husnr + res.bokstav,
                 gatenavn: res.gatenavn
             }))
@@ -49,47 +49,52 @@ export default class Sok extends Component {
         }
 
         this.setState({
-            alleAdresser: sortertListe.sort((a,b) => a.adresse.localeCompare(b.adresse, undefined, { caseFirst: "upper" }))
+            alleAdresser: sortertListe.sort((a, b) => a.adresse.localeCompare(b.adresse, undefined, { numeric: true, sensitivity: 'base' }))
         });
     }
 
     litenListe(liste) {
-        console.log(liste);
         let litenListe = [];
-        for(var j = 0; j < 25; j++) {
-            litenListe.push(liste[j]);
+        if(liste.length > 10) {
+            for (var j = 0; j < 10; j++) {
+                litenListe.push(liste[j]);
+            }
+        } else {
+            litenListe = liste;
         }
 
-        this.setState({
-            suggestions: litenListe
-        })
-
-        console.log(this.state.suggestions);
-        return this.state.suggestions;
+        return litenListe;
     }
 
     finnAdresserSomStarterMed(liste, key, adresse) {
-        console.log(adresse);
+        adresse = adresse[0].toUpperCase() + adresse.slice(1);
+
+        if(!isNaN(adresse[adresse.length-2])) {
+            adresse = adresse.slice(0, -1) + adresse.slice(-1).toUpperCase();
+        }
+
         let starterMedListe = [];
-        for (var i = 0; i < liste.length; i++) {
+        for(var i = 0; i < liste.length; i++) {
             if (liste[i][key].startsWith(adresse)) {
                 starterMedListe.push(liste[i]);
             }
         }
-        
+
+        starterMedListe = this.litenListe(starterMedListe);
+
         return starterMedListe;
     }
 
     getSuggestions = async (value) => {
-        const escapedValue = value.trim().toLowerCase();
+        const forventetVerdi = value.trim().toLowerCase();
 
-        if (escapedValue === '') {
+        if (forventetVerdi === '') {
             return [];
         }
 
-        const url = `${BASE_URL}/finnhelsestasjon/${encodeURIComponent(escapedValue)}`;
-        const document = await fetchJSON(url, { headers: AUTH_HEADER });
-        var adresseInfo = (document.result || []).map((res, i = 0 + 1) => ({
+        const url = `${BASE_URL}/finnhelsestasjon/${encodeURIComponent(forventetVerdi)}`;
+        const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+        var adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
             id: i,
             adresse: res.adresse,
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
@@ -101,7 +106,7 @@ export default class Sok extends Component {
                 .replace(/å/g, 'a')
         }));
 
-        adresseInfo = adresseInfo.find(({adresse}) => adresse === value);
+        adresseInfo = adresseInfo.find(({ adresse }) => adresse === value);
 
         return adresseInfo;
     }
@@ -125,20 +130,21 @@ export default class Sok extends Component {
         });
     };
 
-    onSuggestionsFetchRequested =  async ({ value }) => {
+    onSuggestionsFetchRequested = async ({ value }) => {
         this.setState({
-            suggestions: this.finnAdresserSomStarterMed(this.state.alleAdresser, "adresse", value)
+            adresseforslag: this.finnAdresserSomStarterMed(this.state.alleAdresser, "adresse", value)
         });
     };
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            adresseforslag: []
         });
     };
 
     render() {
-        const { value, suggestions, info, visHelsestasjon } = this.state;
+        const { value, adresseforslag, info, visHelsestasjon } = this.state;
+
         const inputProps = {
             placeholder: "Skriv inn adresse",
             value,
@@ -157,15 +163,11 @@ export default class Sok extends Component {
             color: "#055fa5"
         };
 
-        // const langInput = {
-        //     paddingRight: "150px"
-        // };
-
         return (
             <div className="content">
                 <div className="form-inline box bg-blue-light">
                     <Autosuggest
-                        suggestions={suggestions}
+                        suggestions={adresseforslag}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                         getSuggestionValue={this.getSuggestionValue}
