@@ -125,6 +125,11 @@ export default class Sok extends Component {
     };
 
     onChange = (event, { newValue, method }) => {
+        if(newValue === '') {
+            this.setState({
+                visHelsestasjon: false
+            });
+        }
         this.setState({
             value: newValue
         });
@@ -151,18 +156,6 @@ export default class Sok extends Component {
             onChange: this.onChange
         };
 
-        // const knapp = {
-        //     marginLeft: "20px",
-        //     padding: "2px 20px",
-        //     border: "3px solid #002c54",
-        //     backgroundColor: "#dedede"
-        // };
-
-        const underline = {
-            textDecoration: "underline",
-            color: "#055fa5"
-        };
-
         return (
             <div className="content">
                 <div className="form-inline box bg-blue-light">
@@ -181,7 +174,7 @@ export default class Sok extends Component {
                     visHelsestasjon &&
                     <div className="box bg-blue-light">
                         <h4>
-                            <a style={underline} href={info.lenke}>{info.helsestasjonsonenavn}</a>
+                            <a className="understrek" href={info.lenke}>{info.helsestasjonsonenavn}</a>
                         </h4>
                     </div>
                 }
