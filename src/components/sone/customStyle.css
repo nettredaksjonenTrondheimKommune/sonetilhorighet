@@ -19,7 +19,7 @@
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
-  border: 1px solid #aaa;
+  border: 2px solid #aaa;
   border-radius: 4px;
   display: block;
   margin: 0 auto;
@@ -27,6 +27,7 @@
 
 .react-autosuggest__input--focused {
   outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
 }
 
 .react-autosuggest__input--open {

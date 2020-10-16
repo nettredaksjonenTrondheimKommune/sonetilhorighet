@@ -152,6 +152,7 @@ export default class Sok extends Component {
         const inputProps = {
             placeholder: "Skriv inn adresse",
             value,
+            'aria-label': "Søk etter helsestasjon",
             onChange: this.onChange
         };
 
