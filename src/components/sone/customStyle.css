@@ -1,9 +1,9 @@
-.box.bg-blue-light {
+.boks.bla-boks {
   background: #e9f1f7;
   height: 130px;
 }
   
-.box[class*=bg-] {
+.boks[class*=bla-] {
   padding: 50px;
   margin-top: 30px;
 }

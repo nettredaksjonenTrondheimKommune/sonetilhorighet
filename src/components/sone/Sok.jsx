@@ -76,7 +76,11 @@ export default class Sok extends Component {
         forventetVerdi = forventetVerdi.toLowerCase();
         const regex = new RegExp('^' + forventetVerdi, 'i');
 
-        return liste.filter(res => regex.test(res.adresse));
+        liste = liste.filter(res => regex.test(res.adresse));
+        var litenListe = [];
+        litenListe = this.litenListe(liste);
+
+        return litenListe;
     }
 
     getSuggestions = async (value) => {
@@ -158,7 +162,7 @@ export default class Sok extends Component {
 
         return (
             <div className="content">
-                <div className="form-inline box bg-blue-light">
+                <div className="form-inline boks bla-boks">
                     <Autosuggest
                         suggestions={adresseforslag}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -179,7 +183,7 @@ export default class Sok extends Component {
 
                 {
                     visHelsestasjon &&
-                    <div className="box bg-blue-light">
+                    <div className="boks bla-boks">
                         <h4 className="senter">
                             <a className="understrek" href={info.lenke}>{info.helsestasjonsonenavn}</a>
                         </h4>
