@@ -31,27 +31,35 @@ export default class Sok extends Component {
     }
 
     hentAdresser = async () => {
-        const url = `${BASE_URL}/adresser?limit=55000`;
-        const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+        const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresser'));
 
-        this.setState({
-            alleAdresser: (dokument.result || []).map((res) => ({
-                adresse: res.gatenavn + " " + res.husnr + res.bokstav,
-                gatenavn: res.gatenavn
-            }))
-        });
+        if(cachedAdresser) {
+            this.setState({ alleAdresser: cachedAdresser });
+        } else {
+            const url = `${BASE_URL}/adresser?limit=55000`;
+            const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
 
-        var sortertListe = [];
-
-        for(var i = 0; i < this.state.alleAdresser.length; i++) {
-            if(this.state.alleAdresser[i].gatenavn !== null) {
-                sortertListe.push(this.state.alleAdresser[i]);
+            this.setState({
+                alleAdresser: (dokument.result || []).map((res) => ({
+                    adresse: res.gatenavn + " " + res.husnr + res.bokstav,
+                    gatenavn: res.gatenavn
+                }))
+            });
+    
+            var sortertListe = [];
+    
+            for(var i = 0; i < this.state.alleAdresser.length; i++) {
+                if(this.state.alleAdresser[i].gatenavn !== null) {
+                    sortertListe.push(this.state.alleAdresser[i]);
+                }
             }
-        }
+    
+            this.setState({
+                alleAdresser: sortertListe.sort((a, b) => a.adresse.localeCompare(b.adresse, undefined, { numeric: true, sensitivity: 'base' }))
+            });
 
-        this.setState({
-            alleAdresser: sortertListe.sort((a, b) => a.adresse.localeCompare(b.adresse, undefined, { numeric: true, sensitivity: 'base' }))
-        });
+            localStorage.setItem('alleAdresser', JSON.stringify(this.state.alleAdresser));
+        }
     }
 
     litenListe(liste) {
