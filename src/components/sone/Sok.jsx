@@ -27,10 +27,10 @@ export default class Sok extends Component {
     }
 
     componentDidMount() {
-        this.hentAdresser();
+        this.hentAlleAdresser();
     }
 
-    hentAdresser = async () => {
+    hentAlleAdresser = async () => {
         const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresser'));
 
         if(cachedAdresser) {
@@ -62,7 +62,7 @@ export default class Sok extends Component {
         }
     }
 
-    litenListe(liste) {
+    litenListeMedAdresser(liste) {
         let litenListe = [];
         if(liste.length > 10) {
             for (var j = 0; j < 10; j++) {
@@ -75,23 +75,23 @@ export default class Sok extends Component {
         return litenListe;
     }
 
-    escapeRegexCharacters(str) {
+    forventetRegexSymbol(str) {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
     finnAdresserSomStarterMed(liste, key, adresse) {
-        var forventetVerdi = this.escapeRegexCharacters(adresse.trim());
+        var forventetVerdi = this.forventetRegexSymbol(adresse.trim());
         forventetVerdi = forventetVerdi.toLowerCase();
         const regex = new RegExp('^' + forventetVerdi, 'i');
 
         liste = liste.filter(res => regex.test(res.adresse));
         var litenListe = [];
-        litenListe = this.litenListe(liste);
+        litenListe = this.litenListeMedAdresser(liste);
 
         return litenListe;
     }
 
-    getSuggestions = async (value) => {
+    hentForslag = async (value) => {
         const forventetVerdi = value.trim().toLowerCase();
 
         if (forventetVerdi === '') {
@@ -117,15 +117,15 @@ export default class Sok extends Component {
         return adresseInfo;
     }
 
-    getSuggestionValue = suggestion => suggestion.adresse;
+    getSuggestionValue = forslag => forslag.adresse;
 
-    renderSuggestion = suggestion => (
-        <span>{suggestion.adresse}</span>
+    renderSuggestion = forslag => (
+        <span>{forslag.adresse}</span>
     );
 
     onSuggestionSelected = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         this.setState({
-            info: await this.getSuggestions(suggestionValue),
+            info: await this.hentForslag(suggestionValue),
             visHelsestasjon: true
         });
     };
