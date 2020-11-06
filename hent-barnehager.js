@@ -5,7 +5,6 @@ const proj = require("proj4")
 proj.defs("EPSG:4258", "+title=ETRS89 +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs ");
 proj.defs("EPSG:6172", "+title=ETRS89 / UTM zone 32 + NN54 height +proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +vunits=m +no_defs");
 
-
 const URL = "https://www.trondheim.kommune.no/sokeside"
 const BLUEGARDEN = "https://bluegarden.trondheim.kommune.no/c438f66d-2b18-40a3-9e22-547e8cf58a21/api/unit/"
 const KARTVERKET = "https://ws.geonorge.no/adresser/v1/sok"

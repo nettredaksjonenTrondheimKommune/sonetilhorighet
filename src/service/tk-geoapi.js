@@ -1,78 +1,75 @@
-import leven from 'leven';
+// import leven from 'leven';
 import { fetchJSON } from './fetchJSON';
-import skoler from './skoler.json';
-import { reportFetchSuccess, reportFetchRequest, reportFetchError } from './fetch.actions';
+// import skoler from './skoler.json';
 
 /**
  * Søk etter soner innen kommunen.
  */
-const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse/';
+const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse';
 const AUTH_HEADER = {
     'X-API-KEY': 'oz4_500oOHb-vbI6ib8-nFlexij68-C-KOXEMkFALy4=',
 };
-const SERVICE_NAME = 'tk-geoapi';
 
-const noop = () => { };
-export default async function finnSoner(adresse, dispatch = noop) {
-    dispatch(reportFetchRequest(SERVICE_NAME));
-    const promises = [
-        // fetchAndSelect(adresse, 'adresserkretser'),
-        // fetchAndSelect(adresse, 'finnbydel'),
-        fetchAndSelect(adresse, 'finnhelsestasjon')
-    ];
+export default async function finnSoner(adresse, sonetype) {
+    const forventetVerdi = adresse.trim().toLowerCase();
 
-    try {
-        const results = await Promise.all(promises);
-        const [helsestasjonTreff] = results;
-        dispatch(reportFetchSuccess(SERVICE_NAME));
-
-        if(results[0].adresse === adresse) {
-            return [
-                helsestasjon(helsestasjonTreff),
-            ];
-        } else {
-            return results;
-        }
-
-        // if(results[2] !== null) {
-        //     const [soner, bydelTreff, helsestasjonTreff] = results;
-        //     dispatch(reportFetchSuccess(SERVICE_NAME));
-    
-        //     return [
-        //         barneskole(soner),
-        //         bydel(bydelTreff),
-        //         helsesone(soner),
-        //         helsestasjon(helsestasjonTreff),
-        //         ungdomsskole(soner),
-        //         valgkrets(soner)
-        //     ];
-        // }
-    } catch (error) {
-        dispatch(reportFetchError(SERVICE_NAME, error));
-    }
-}
-
-async function fetchAndSelect(adresse, endpoint) {
-    const url = `${BASE_URL + endpoint}/${encodeURIComponent(adresse)}`;
-    const document = await fetchJSON(url, { headers: AUTH_HEADER });
-    const adresser = (document.result || []).map((a) => ({
-        ...a,
-        adresse: a.adresse.toLowerCase(),
-    }));
-    let treff = adresser.find((a) => a.adresse === adresse);
-    treff = treff || adresser.find((a) => a.adresse.startsWith(adresse));
-    treff = treff || adresser.find((a) => leven(a.adresse, adresse) <= 2);
-
-    if(typeof treff === 'undefined') {
-        treff = {adresse: "Finner du ikke adressen din? Prøv å endre skrivemåte, for eksempel på veg/vei?", navn: "", verdi: "", lenke: ""};
-    } else {
-        if(treff.adresse !== adresse) {
-            treff = {adresse: "Har du husket å skrive gatenummer og eventuelt bokstav?", navn: "", verdi: "", lenke: ""};
-        }
+    if (forventetVerdi === '') {
+        return [];
     }
 
-    return treff;
+    const url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
+    const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+    var adresseInfo = [];
+
+    if(sonetype === 'finnhelsestasjon') {
+        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
+            id: i,
+            adresse: res.adresse,
+            geomb: res.geom.coordinates[0],
+            geoml: res.geom.coordinates[1],
+            helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
+            lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
+                .toLowerCase()
+                .replace(/[^a-zæøå]/g, '-')
+                .replace(/æ/g, 'a')
+                .replace(/ø/g, 'o')
+                .replace(/å/g, 'a')
+        }));
+    }
+
+    if(sonetype === 'finnbydel') {
+        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
+            id: i,
+            adresse: res.adresse,
+            bydelnavn: res.bydelnavn
+        }));
+    }
+
+    adresseInfo = adresseInfo.find(({ adresse }) => adresse === adresse);
+
+    return adresseInfo;
 }
+
+// async function fetchAndSelect(adresse, endpoint) {
+//     const url = `${BASE_URL + endpoint}/${encodeURIComponent(adresse)}`;
+//     const document = await fetchJSON(url, { headers: AUTH_HEADER });
+//     const adresser = (document.result || []).map((a) => ({
+//         ...a,
+//         adresse: a.adresse.toLowerCase(),
+//     }));
+//     let treff = adresser.find((a) => a.adresse === adresse);
+//     treff = treff || adresser.find((a) => a.adresse.startsWith(adresse));
+//     treff = treff || adresser.find((a) => leven(a.adresse, adresse) <= 2);
+
+//     if (!treff) {
+//         if (adresse.match(/ [0-9]/) !== null) {
+//           return fetchAndSelect(adresse.replace(/ [0-9]+.?/, ''), endpoint);
+//         }
+//         throw new Error(`No results for ${adresse}, got response ${JSON.stringify(document, null, 2)}`);
+//     }
+
+//     return treff;
+// }
 
 // function capitalize(text) {
 //     return text[0].toUpperCase() + text.slice(1).toLowerCase();
@@ -99,7 +96,7 @@ async function fetchAndSelect(adresse, endpoint) {
 //     return {
 //         navn: 'bydel',
 //         verdi: treff.bydelnavn,
-//         lenke: null,
+//         lenke: null
 //     };
 // }
 
@@ -196,22 +193,22 @@ async function fetchAndSelect(adresse, endpoint) {
  *   "kretsnr": 7075
  * }
  */
-function helsestasjon(treff) {
-    const adresse = treff.adresse;
-    const navn = `${treff.helsestasjonsonenavn} helsestasjon`;
-    const normalisertNavn = navn
-        .toLowerCase()
-        .replace(/[^a-zæøå]/g, '-')
-        .replace(/æ/g, 'a')
-        .replace(/ø/g, 'o')
-        .replace(/å/g, 'a');
+// function helsestasjon(treff) {
+//     const adresse = treff.adresse;
+//     const navn = `${treff.helsestasjonsonenavn} helsestasjon`;
+//     const normalisertNavn = navn
+//         .toLowerCase()
+//         .replace(/[^a-zæøå]/g, '-')
+//         .replace(/æ/g, 'a')
+//         .replace(/ø/g, 'o')
+//         .replace(/å/g, 'a');
 
-    const lenke = `https://trondheim.kommune.no/${normalisertNavn}`;
+//     const lenke = `https://trondheim.kommune.no/${normalisertNavn}`;
 
-    return {
-        adresse: adresse,
-        navn: 'helsestasjon',
-        verdi: navn,
-        lenke,
-    };
-}
+//     return {
+//         adresse: adresse,
+//         navn: 'helsestasjon',
+//         verdi: navn,
+//         lenke,
+//     };
+// }
