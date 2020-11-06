@@ -1,9 +1,13 @@
 import React from 'react';
 import './App.css';
-import Sok from './components/sone/Sok';
+import Helsestasjon from './components/sone/helsestasjon';
+import Bydel from './components/sone/bydel';
 
 const App = () => (
-  <Sok />
+  <>
+    <Helsestasjon />
+    <Bydel />
+  </>
 )
 
 export default App;

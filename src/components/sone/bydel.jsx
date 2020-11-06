@@ -12,7 +12,7 @@ const AUTH_HEADER = {
 };
 const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse';
 
-export default class Sok extends Component {
+export default class Bydel extends Component {
     constructor() {
         super();
 
@@ -21,7 +21,7 @@ export default class Sok extends Component {
             adresseforslag: [],
             ingenAdresseforslag: false,
             info: {},
-            visHelsestasjon: false,
+            visBydel: false,
             alleAdresser: []
         };
     }
@@ -98,18 +98,12 @@ export default class Sok extends Component {
             return [];
         }
 
-        const url = `${BASE_URL}/finnhelsestasjon/${encodeURIComponent(forventetVerdi)}`;
+        const url = `${BASE_URL}/finnbydel/${encodeURIComponent(forventetVerdi)}`;
         const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
         var adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
             id: i,
             adresse: res.adresse,
-            helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
-            lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
-                .toLowerCase()
-                .replace(/[^a-zæøå]/g, '-')
-                .replace(/æ/g, 'a')
-                .replace(/ø/g, 'o')
-                .replace(/å/g, 'a')
+            bydelnavn: `${res.bydelnavn}`,
         }));
 
         adresseInfo = adresseInfo.find(({ adresse }) => adresse === value);
@@ -126,14 +120,14 @@ export default class Sok extends Component {
     onSuggestionSelected = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         this.setState({
             info: await this.hentForslag(suggestionValue),
-            visHelsestasjon: true
+            visBydel: true
         });
     };
 
     onChange = (event, { newValue, method }) => {
         if(newValue === '') {
             this.setState({
-                visHelsestasjon: false
+                visBydel: false
             });
         }
         this.setState({
@@ -159,12 +153,12 @@ export default class Sok extends Component {
     };
 
     render() {
-        const { value, adresseforslag, ingenAdresseforslag, info, visHelsestasjon } = this.state;
+        const { value, adresseforslag, ingenAdresseforslag, info, visBydel } = this.state;
 
         const inputProps = {
             placeholder: "Skriv inn adresse",
             value,
-            'aria-label': "Søk etter helsestasjon",
+            'aria-label': "Søk etter bydel",
             onChange: this.onChange
         };
 
@@ -190,10 +184,10 @@ export default class Sok extends Component {
                 </div>
 
                 {
-                    visHelsestasjon &&
+                    visBydel &&
                     <div className="boks bla-boks">
                         <h4 className="senter">
-                            <a className="understrek" href={info.lenke}>{info.helsestasjonsonenavn}</a>
+                            <a className="understrek" href={info.lenke}>{info.bydelnavn}</a>
                         </h4>
                     </div>
                 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'; // eslint-disable-line
 import App from '../App';
 import '../components/sone/customStyle.css';
 
-import Sok from '../components/sone/Sok';
+import Helsestasjon from '../components/sone/helsestasjon';
 
 // eslint-disable-next-line react/jsx-filename-extension
 ReactDOM.render(
@@ -12,8 +12,8 @@ ReactDOM.render(
       <></>
     )}
     renderChildren={() => (
-      <Sok />
+      <Helsestasjon />
     )}
   />,
-  document.getElementById('tk-sonetilhorighet'),
+  document.getElementById('tk-helsestasjon'),
 );
