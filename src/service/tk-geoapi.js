@@ -45,7 +45,7 @@ export default async function finnSoner(adresse, sonetype) {
         }));
     }
 
-    adresseInfo = adresseInfo.find(({ adresse }) => adresse === adresse);
+    adresseInfo = adresseInfo.find(( a ) => a.adresse === adresse);
 
     return adresseInfo;
 }

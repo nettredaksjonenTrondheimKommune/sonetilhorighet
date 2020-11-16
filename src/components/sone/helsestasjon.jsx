@@ -25,7 +25,7 @@ export default class Helsestasjon extends Component {
             ? <div></div>
             :
             <>
-                <div className="boks bla-boks">
+                <div className="boks bla-boks margin-top">
                     <h4 className="senter">
                         <a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a>
                     </h4>

@@ -3,7 +3,7 @@ import { fetchJSON } from './fetchJSON';
 /**
  * Henter alle adresser i kommunen.
  */
-const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse/';
+const BASE_URL = 'https://kart.trondheim.kommune.no/tk-geoapi/api/v1/adresse';
 const AUTH_HEADER = {
     'X-API-KEY': 'oz4_500oOHb-vbI6ib8-nFlexij68-C-KOXEMkFALy4=',
 };

@@ -25,11 +25,15 @@ export default class Bydel extends Component {
             ? <div></div>
             :
             <>
-                <div className="boks bla-boks">
+                <div className="boks bla-boks margin-top">
                     <h4 className="senter">
                         {bydel.bydelnavn}
                     </h4>
                 </div>
+
+                {/* <div>
+                    <iframe height="500px" width="500px" title="Kart" src="https://kart.trondheim.kommune.no/map/helse_oms/#13/63.4147/10.4222/topo_graa-bydel"></iframe>
+                </div> */}
             </>
         )
     }
