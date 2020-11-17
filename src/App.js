@@ -65,14 +65,10 @@ class App extends Component {
   };
 
   onChange = (event, { newValue, method }) => {
-      if(newValue === '') {
-          this.setState({
-            visResultat: false
-          });
-      }
-      this.setState({
-          value: newValue
-      });
+    this.setState({
+      visResultat: false,
+      value: newValue
+    });
   };
 
   onSuggestionsFetchRequested = async ({ value }) => {

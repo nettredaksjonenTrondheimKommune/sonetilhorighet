@@ -13,9 +13,14 @@ export default class Helsestasjon extends Component {
     }
 
     async componentDidMount() {
+        await this.hentHelsestasjon();
+    }
+
+    async hentHelsestasjon() {
         this.setState({
             helsestasjon: await finnSoner(this.props.adresse, 'finnhelsestasjon')
         });
+        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.helsestasjon.geoml + "/" + this.state.helsestasjon.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {

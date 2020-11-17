@@ -41,6 +41,8 @@ export default async function finnSoner(adresse, sonetype) {
         adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
             id: i,
             adresse: res.adresse,
+            geomb: res.geom.coordinates[0],
+            geoml: res.geom.coordinates[1],
             bydelnavn: res.bydelnavn
         }));
     }

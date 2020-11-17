@@ -8,18 +8,24 @@ export default class Bydel extends Component {
 
         this.state = {
             adresse: '',
-            bydel: {}
+            bydel: {},
+            url: ''
         };
     }
 
     async componentDidMount() {
+        await this.hentBydel();
+    }
+
+    async hentBydel() {
         this.setState({
             bydel: await finnSoner(this.props.adresse, 'finnbydel')
         });
+        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.bydel.geoml + "/" + this.state.bydel.geomb + "/topo_graa-bydel";
     }
 
     render() {
-        const { bydel } = this.state;
+        const { bydel, url } = this.state;
 
         return (bydel.length === 0
             ? <div></div>
@@ -32,7 +38,7 @@ export default class Bydel extends Component {
                 </div>
 
                 {/* <div>
-                    <iframe height="500px" width="500px" title="Kart" src="https://kart.trondheim.kommune.no/map/helse_oms/#13/63.4147/10.4222/topo_graa-bydel"></iframe>
+                    <iframe height="500px" width="100%" title="Kart" src={url}></iframe>
                 </div> */}
             </>
         )
