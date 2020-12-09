@@ -11,7 +11,8 @@ const AUTH_HEADER = {
 };
 
 export default async function finnSoner(adresse, sonetype) {
-    const forventetVerdi = adresse.trim().toLowerCase();
+    let forventetVerdi = adresse;
+    forventetVerdi = adresse.trim().toLowerCase();
 
     if (forventetVerdi === '') {
         return [];
@@ -24,7 +25,8 @@ export default async function finnSoner(adresse, sonetype) {
     if(sonetype === 'finnhelsestasjon') {
         adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
             id: i,
-            adresse: res.adresse,
+            // adresse: res.adresse,
+            adresse: adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
@@ -44,6 +46,20 @@ export default async function finnSoner(adresse, sonetype) {
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
             bydelnavn: res.bydelnavn
+        }));
+    }
+
+    if(sonetype === 'adresserkretser') {
+        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
+            id: i,
+            adresse: res.adresse,
+            omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
+            lenke: `https://trondheim.kommune.no/org/helse-og-velferd/hjemmetjenester/` + `${res.omsorgsone} hjemmetjeneste`
+                .toLowerCase()
+                .replace(/[^a-zæøå]/g, '-')
+                .replace(/æ/g, 'a')
+                .replace(/ø/g, 'o')
+                .replace(/å/g, 'a')
         }));
     }
 

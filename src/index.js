@@ -5,6 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import Helsestasjon from './components/sone/helsestasjon';
 import Bydel from './components/sone/bydel';
+import Omsorgssone from './components/sone/omsorgssone';
 
 ReactDOM.render(
     <App
@@ -13,6 +14,8 @@ ReactDOM.render(
                 <Helsestasjon adresse={adresse} />
 
                 <Bydel adresse={adresse} />
+
+                <Omsorgssone adresse={adresse} />
             </>
         )}
     

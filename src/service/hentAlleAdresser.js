@@ -9,7 +9,8 @@ const AUTH_HEADER = {
 };
 
 export default async function hentAlleAdresser() {
-    const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresser'));
+    window.localStorage.removeItem('alleAdresser');
+    const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresserTrondheim'));
     let alleAdresser = [];
 
     if(cachedAdresser) {
@@ -33,7 +34,7 @@ export default async function hentAlleAdresser() {
 
         alleAdresser = sortertListe.sort((a, b) => a.adresse.localeCompare(b.adresse, undefined, { numeric: true, sensitivity: 'base' }));
 
-        localStorage.setItem('alleAdresser', JSON.stringify(alleAdresser));
+        localStorage.setItem('alleAdresserTrondheim', JSON.stringify(alleAdresser));
 
         return alleAdresser;
     }
