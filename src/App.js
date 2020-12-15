@@ -24,8 +24,8 @@ class App extends Component {
   litenListeMedAdresser(liste) {
       let litenListe = [];
 
-      if(liste.length > 10) {
-          for (var i = 0; i < 10; i++) {
+      if(liste.length > 5) {
+          for (var i = 0; i < 5; i++) {
               litenListe.push(liste[i]);
           }
       } else {
@@ -95,12 +95,14 @@ class App extends Component {
       placeholder: "Skriv inn adresse",
       value,
       'aria-label': "Søk etter bydel",
+      'aria-labelledby': "adresseSok",
       onChange: this.onChange
     };
 
     return (
       <div className="content">
-        <div className="form-inline boks bla-boks">
+        <div className="boks bla-boks">
+          <h3 id="adresseSok" className="senter">Søk opp via adressen din</h3>
           <Autosuggest
             suggestions={adresseforslag}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

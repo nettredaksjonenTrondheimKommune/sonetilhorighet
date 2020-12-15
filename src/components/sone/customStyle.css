@@ -1,15 +1,14 @@
 .boks.bla-boks {
   background: #e9f1f7;
-  height: 18vh;
   width: 100%;
 }
   
 .boks[class*=bla-] {
-  padding: 13% 13% 13% 13%;
+  padding: 5% 13% 5% 13%;
 }
 
 .margin-top {
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .react-autosuggest__container {

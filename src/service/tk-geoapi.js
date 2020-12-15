@@ -14,8 +14,8 @@ export default async function finnSoner(adresse, sonetype) {
     let forventetVerdi = adresse;
     forventetVerdi = adresse.trim().toLowerCase();
 
-    if (forventetVerdi === '') {
-        return [];
+    if (adresse === '') {
+        throw new Error('Invalid adress');
     }
 
     const url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
@@ -29,6 +29,9 @@ export default async function finnSoner(adresse, sonetype) {
             adresse: adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
+            // telefon: res.telefon,
+            // epost: `${res.helsestasjonsonenavn.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
+            // epostTil: "mailto:" + `${res.helsestasjonsonenavn.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
             lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
                 .toLowerCase()
@@ -54,6 +57,8 @@ export default async function finnSoner(adresse, sonetype) {
             id: i,
             adresse: res.adresse,
             omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
+            // epost: `${res.omsorgsone.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
+            // epostTil: "mailto:" + `${res.omsorgsone.toLowerCase()}-hjemmetj.postmottak@trondheim.kommune.no`,
             lenke: `https://trondheim.kommune.no/org/helse-og-velferd/hjemmetjenester/` + `${res.omsorgsone} hjemmetjeneste`
                 .toLowerCase()
                 .replace(/[^a-zæøå]/g, '-')

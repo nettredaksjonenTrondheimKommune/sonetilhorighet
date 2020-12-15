@@ -32,10 +32,18 @@ export default class Omsorgssone extends Component {
             ? <div></div>
             :
             <>
-                <div className="boks bla-boks margin-top">
-                    <h4 className="senter">
+                <div className="boks bla-boks margin-top senter">
+                    {/* <h4>Kontaktinformasjon</h4> */}
+                    {/* <h5>
+                        <a className="understrek" href={omsorgsone.lenke}>{omsorgsone.omsorgsone}</a>
+                    </h5> */}
+                    <h4>
                         <a className="understrek" href={omsorgsone.lenke}>{omsorgsone.omsorgsone}</a>
                     </h4>
+                    {/* <p>Telefon: <a className="understrek" href={omsorgsone.telefon}>xx xx xx xx</a></p>
+                    <p>Epost: <a className="understrek" href={omsorgsone.epostTil}>{omsorgsone.epost}</a></p>
+                    <p><strong>Besøksadresse</strong><br />Testvegen 99, 7044 Trondheim</p>
+                    <p><strong>Postadresse</strong><br />Postboks 2300 Torgarden, 7004 Trondheim</p> */}
                 </div>
 
                 {/* <div>
