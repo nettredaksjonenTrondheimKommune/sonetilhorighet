@@ -1,5 +1,6 @@
 // import leven from 'leven';
 import { fetchJSON } from './fetchJSON';
+import helsestasjoner from './helsestasjoner.json';
 // import skoler from './skoler.json';
 
 /**
@@ -11,8 +12,8 @@ const AUTH_HEADER = {
 };
 
 export default async function finnSoner(adresse, sonetype) {
-    let forventetVerdi = adresse;
-    forventetVerdi = adresse.trim().toLowerCase();
+    console.log(adresse + " " + sonetype);
+    let forventetVerdi = adresse.trim().toLowerCase();
 
     if (adresse === '') {
         throw new Error('Invalid adress');
@@ -23,16 +24,13 @@ export default async function finnSoner(adresse, sonetype) {
     var adresseInfo = [];
 
     if(sonetype === 'finnhelsestasjon') {
-        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
-            id: i,
+        adresseInfo = (dokument.result || []).map( res => ({
             // adresse: res.adresse,
             adresse: adresse,
-            geomb: res.geom.coordinates[0],
-            geoml: res.geom.coordinates[1],
-            // telefon: res.telefon,
-            // epost: `${res.helsestasjonsonenavn.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
-            // epostTil: "mailto:" + `${res.helsestasjonsonenavn.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
+            // geomb: res.geom.coordinates[0],
+            // geoml: res.geom.coordinates[1],
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
+            // helsestasjonPostadresse: 'Postboks 2300 Torgarden, 7004 Trondheim',
             lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
                 .toLowerCase()
                 .replace(/[^a-zæøå]/g, '-')
@@ -43,8 +41,7 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     if(sonetype === 'finnbydel') {
-        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
-            id: i,
+        adresseInfo = (dokument.result || []).map( res => ({
             adresse: res.adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
@@ -53,8 +50,7 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     if(sonetype === 'adresserkretser') {
-        adresseInfo = (dokument.result || []).map((res, i = 0 + 1) => ({
-            id: i,
+        adresseInfo = (dokument.result || []).map( res => ({
             adresse: res.adresse,
             omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
             // epost: `${res.omsorgsone.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
@@ -69,6 +65,14 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     adresseInfo = adresseInfo.find(( a ) => a.adresse === adresse);
+    
+    if(sonetype === 'finnhelsestasjon') {
+        for(var i = 0; i < helsestasjoner.length; i++) {
+            if(helsestasjoner[i].helsestasjonsonenavn === adresseInfo.helsestasjonsonenavn) {
+                adresseInfo = {...adresseInfo, ...helsestasjoner[i]};
+            }
+        }
+    }
 
     return adresseInfo;
 }

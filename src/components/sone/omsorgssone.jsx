@@ -17,6 +17,7 @@ export default class Omsorgssone extends Component {
     }
 
     async hentOmsorgssone() {
+        console.log(this.props.adresse);
         this.state.adresse = this.props.adresse.split(/(?=[A-Z])/).join(" ");
 
         this.setState({

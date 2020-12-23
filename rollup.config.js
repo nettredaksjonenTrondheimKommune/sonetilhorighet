@@ -37,7 +37,7 @@ const plugins = [
   terser(),
 ];
 
-const entrypoints = ['helsestasjon', 'bydel'];
+const entrypoints = ['helsestasjon', 'bydel', 'omsorgssone'];
 
 export default entrypoints.map((name) => ({
   input: `src/pages/${name}.js`,

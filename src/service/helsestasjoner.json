@@ -1,0 +1,79 @@
+[
+    {
+        "helsestasjonsonenavn" : "BFT Østbyen helsestasjon",
+        "telefon" : "90 62 11 35",
+        "epost" : "jordmortjenesten@trondheim.kommune.no",
+        "epostTil" : "mailto:jordmortjenesten@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Falkenborgvegen 9, 7044 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Blussuvoll helsestasjon",
+        "telefon" : "72 54 68 90",
+        "epost" : "blussuvoll.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:blussuvoll.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Lillebergvegen 7, 7052 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Byåsen helsestasjon",
+        "telefon" : "72 54 65 50",
+        "epost" : "byasen.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:byasen.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Gjørtlervegen 5, 7021 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Falkenborg helsestasjon",
+        "telefon" : "48 05 51 00",
+        "epost" : "falkenborg.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:falkenborg.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Peder Falcks veg 31A, 7044 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Helsestasjon for ungdom (HFU)",
+        "telefon" : "",
+        "epost" : "",
+        "epostTil" : "",
+        "helsestasjonBesoksadresse" : ""
+    },
+    {
+        "helsestasjonsonenavn" : "Klæbu helsestasjon",
+        "telefon" : "97 77 28 52",
+        "epost" : "klabu.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:klabu.helsestasjon@trondheim.kommune.no",
+        "adhelsestasjonBesoksadresseresse" : "Vikingvegen 8, 7540 Klæbu"
+    },
+    {
+        "helsestasjonsonenavn" : "Nidarvoll helsestasjon",
+        "telefon" : "72 54 56 30",
+        "epost" : "nidarvoll.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:nidarvoll.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Klæbuveien 194, 7037 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Romolslia helsestasjon",
+        "telefon" : "72 54 64 95",
+        "epost" : "romolslia.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:romolslia.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Tamburhaugen 1, 7029 Trondheim"
+    },
+    {
+        "helsestasjonsonenavn" : "Rosten helsestasjon",
+        "telefon" : "72 54 93 10",
+        "epost" : "rosten.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:rosten.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Østre Rosten 43, 7075 Tiller"
+    },
+    {
+        "helsestasjonsonenavn" : "Saupstad helsestasjon",
+        "telefon" : "72 54 79 70",
+        "epost" : "saupstad.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:saupstad.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Reier Søbstads veg 22, 7078 Saupstad"
+    },
+    {
+        "helsestasjonsonenavn" : "Sentrum helsestasjon",
+        "telefon" : "72 54 60 60",
+        "epost" : "sentrum.helsestasjon@trondheim.kommune.no",
+        "epostTil" : "mailto:sentrum.helsestasjon@trondheim.kommune.no",
+        "helsestasjonBesoksadresse" : "Erling Skakkes gate 49B, 7012 Trondheim"
+    }
+]

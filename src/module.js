@@ -6,6 +6,7 @@ import soneTranslation from './components/sone/translations.json';
 // export { default as Tommekalender } from './components/tommekalender/Tommekalender';
 export { default as Helsestasjon } from './components/sone/helsestasjon';
 export { default as Bydel } from './components/sone/bydel';
+export { default as Omsorgsone } from './components/sone/omsorgssone';
 
 export function getTranslations() {
   return {

@@ -59,8 +59,9 @@ export default class Bydel extends Component {
     }
 
     render() {
-        const { bydel, url, selectedOption } = this.state;
-        const placeholder = "Velg en bydel";
+        const { bydel } = this.state;
+        // const { bydel, url, selectedOption } = this.state;
+        // const placeholder = "Velg en bydel";
 
         return (bydel.length === 0
             ? <div></div>

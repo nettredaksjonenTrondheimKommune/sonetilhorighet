@@ -89,7 +89,7 @@ class App extends Component {
   };
 
   render() {
-    const { renderHeader, renderChildren } = this.props;
+    const { renderChildren } = this.props;
     const { value, adresseforslag, ingenAdresseforslag, adresse, visResultat } = this.state;
     const inputProps = {
       placeholder: "Skriv inn adresse",
