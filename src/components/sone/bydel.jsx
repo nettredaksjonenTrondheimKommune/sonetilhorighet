@@ -55,6 +55,15 @@ export default class Bydel extends Component {
         this.setState({
             bydel: await finnSoner(this.props.adresse, 'finnbydel')
         });
+
+        if(this.state.bydel.length === 0) {
+            this.state.adresse = this.props.adresse.replace(/(?<=[0-9])(?=[A-Za-z])/).slice(0, this.props.adresse.length-1);
+            
+            this.setState({
+                bydel: await finnSoner(this.state.adresse, 'finnbydel')
+            });
+        }
+
         this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.bydel.geoml + "/" + this.state.bydel.geomb + "/topo_graa-bydel";
     }
 
@@ -64,7 +73,7 @@ export default class Bydel extends Component {
         // const placeholder = "Velg en bydel";
 
         return (bydel.length === 0
-            ? <div></div>
+            ? <div className="boks bla-boks margin-top senter"><h4>Vi finner ingen bydel som hører til denne adressen!</h4></div>
             :
             <>
                 <div className="boks bla-boks margin-top senter">

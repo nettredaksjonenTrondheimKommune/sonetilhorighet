@@ -12,7 +12,6 @@ const AUTH_HEADER = {
 };
 
 export default async function finnSoner(adresse, sonetype) {
-    console.log(adresse + " " + sonetype);
     let forventetVerdi = adresse.trim().toLowerCase();
 
     if (adresse === '') {
@@ -21,7 +20,12 @@ export default async function finnSoner(adresse, sonetype) {
 
     const url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
     const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+
     var adresseInfo = [];
+
+    if(dokument.result.length === 0) {
+        return adresseInfo = [];
+    }    
 
     if(sonetype === 'finnhelsestasjon') {
         adresseInfo = (dokument.result || []).map( res => ({
@@ -42,7 +46,8 @@ export default async function finnSoner(adresse, sonetype) {
 
     if(sonetype === 'finnbydel') {
         adresseInfo = (dokument.result || []).map( res => ({
-            adresse: res.adresse,
+            // adresse: res.adresse,
+            adresse: adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
             bydelnavn: res.bydelnavn
