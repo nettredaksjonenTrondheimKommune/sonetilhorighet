@@ -44,17 +44,17 @@ class App extends Component {
       forventetVerdi = forventetVerdi.toLowerCase();
       const regex = new RegExp('^' + forventetVerdi, 'i');
 
-      liste = liste.filter(res => regex.test(res.adresse));
+      liste = liste.filter(res => regex.test(res));
       var litenListe = [];
       litenListe = this.litenListeMedAdresser(liste);
 
       return litenListe;
   }
 
-  getSuggestionValue = forslag => forslag.adresse;
+  getSuggestionValue = forslag => forslag;
 
   renderSuggestion = forslag => (
-    <span>{forslag.adresse}</span>
+    <span>{forslag}</span>
   );
 
   onSuggestionSelected = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
@@ -101,8 +101,8 @@ class App extends Component {
 
     return (
       <div className="content">
-        <div className="boks bla-boks">
-          <h3 id="adresseSok" className="senter">Søk opp via adressen din</h3>
+        <div className="boks bla-boks senter">
+          <h3 id="adresseSok">Søk opp via adressen din</h3>
           <Autosuggest
             suggestions={adresseforslag}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

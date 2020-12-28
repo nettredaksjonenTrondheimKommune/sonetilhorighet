@@ -9,14 +9,16 @@ const AUTH_HEADER = {
 };
 
 export default async function hentAlleAdresser() {
-    window.localStorage.removeItem('alleAdresser');
-    const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresserTrondheim'));
+    window.localStorage.removeItem('alle');
+    window.localStorage.removeItem('alleAdresserTrondheim');
+    
+    const cachedAdresser = JSON.parse(localStorage.getItem('alleAdresserITrondheim'));
     let alleAdresser = [];
 
-    if(cachedAdresser) {
+    if (cachedAdresser) {
         alleAdresser = cachedAdresser;
     } else {
-        const url = `${BASE_URL}/adresser?limit=55000`;
+        const url = `${BASE_URL}/adresser?limit=60000`;
         const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
 
         alleAdresser = (dokument.result || []).map((res) => ({
@@ -26,15 +28,15 @@ export default async function hentAlleAdresser() {
 
         var sortertListe = [];
 
-        for(var i = 0; i < alleAdresser.length; i++) {
-            if(alleAdresser[i].gatenavn !== null) {
-                sortertListe.push(alleAdresser[i]);
+        for (var i = 0; i < alleAdresser.length; i++) {
+            if (alleAdresser[i].gatenavn !== null) {
+                sortertListe.push(alleAdresser[i].adresse);
             }
         }
 
-        alleAdresser = sortertListe.sort((a, b) => a.adresse.localeCompare(b.adresse, undefined, { numeric: true, sensitivity: 'base' }));
+        alleAdresser = sortertListe.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
-        localStorage.setItem('alleAdresserTrondheim', JSON.stringify(alleAdresser));
+        localStorage.setItem('alleAdresserITrondheim', JSON.stringify(alleAdresser));
 
         return alleAdresser;
     }

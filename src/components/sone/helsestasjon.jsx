@@ -31,10 +31,8 @@ export default class Helsestasjon extends Component {
             :
             <>
                 <div className="boks bla-boks margin-top senter">
-                    <h4>Kontaktinformasjon</h4>
-                    <h5>
-                        <a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a>
-                    </h5>
+                    <h3>Kontaktinformasjon</h3>
+                    <p><a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p>
                     {/* <h4>
                         <a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a>
                     </h4> */}
