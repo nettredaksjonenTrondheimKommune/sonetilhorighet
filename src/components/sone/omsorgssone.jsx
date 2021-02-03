@@ -8,7 +8,7 @@ export default class Omsorgssone extends Component {
 
         this.state = {
             adresse: '',
-            omsorgsone: {}
+            omsorgssone: {}
         };
     }
 
@@ -20,30 +20,24 @@ export default class Omsorgssone extends Component {
         this.state.adresse = this.props.adresse.split(/(?<=[0-9])(?=[A-Za-z])/).join(" ");
 
         this.setState({
-            omsorgsone: await finnSoner(this.state.adresse, 'adresserkretser')
+            omsorgssone: await finnSoner(this.state.adresse, 'adresserkretser')
         });
-        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.omsorgsone.geoml + "/" + this.state.omsorgsone.geomb + "/topo_graa-helsestasjonsone";
+        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.omsorgssone.geoml + "/" + this.state.omsorgssone.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {
-        const { omsorgsone } = this.state;
+        const { omsorgssone } = this.state;
 
-        return (omsorgsone.length === 0
+        return (omsorgssone.length === 0
             ? <div></div>
             :
             <>
                 <div className="boks bla-boks margin-top senter">
-                    {/* <h4>Kontaktinformasjon</h4> */}
-                    {/* <h5>
-                        <a className="understrek" href={omsorgsone.lenke}>{omsorgsone.omsorgsone}</a>
-                    </h5> */}
-                    <h4>
-                        <a className="understrek" href={omsorgsone.lenke}>{omsorgsone.omsorgsone}</a>
-                    </h4>
-                    {/* <p>Telefon: <a className="understrek" href={omsorgsone.telefon}>xx xx xx xx</a></p>
-                    <p>Epost: <a className="understrek" href={omsorgsone.epostTil}>{omsorgsone.epost}</a></p>
-                    <p><strong>Besøksadresse</strong><br />Testvegen 99, 7044 Trondheim</p>
-                    <p><strong>Postadresse</strong><br />Postboks 2300 Torgarden, 7004 Trondheim</p> */}
+                    <h3>Kontaktinformasjon</h3>
+                    {omsorgssone.omsorgsone ? <p><a className="understrek" href={omsorgssone.lenke}>{omsorgssone.omsorgsone}</a></p> : ''}
+                    {omsorgssone.telefon ? <p>Telefon: <a className="understrek" href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
+                    {omsorgssone.epost ? <p>Epost: <a className="understrek" href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}
+                    {omsorgssone.hjemmetjenesteBesoksadresse ? <p><strong>Besøksadresse</strong><br />{omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
                 </div>
 
                 {/* <div>

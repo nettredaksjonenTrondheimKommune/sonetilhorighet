@@ -1,7 +1,7 @@
 // import leven from 'leven';
 import { fetchJSON } from './fetchJSON';
 import helsestasjoner from './helsestasjoner.json';
-// import skoler from './skoler.json';
+import omsorgssoner from './omsorgssoner.json';
 
 /**
  * Søk etter soner innen kommunen.
@@ -34,7 +34,6 @@ export default async function finnSoner(adresse, sonetype) {
             // geomb: res.geom.coordinates[0],
             // geoml: res.geom.coordinates[1],
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
-            // helsestasjonPostadresse: 'Postboks 2300 Torgarden, 7004 Trondheim',
             lenke: `https://trondheim.kommune.no/` + `${res.helsestasjonsonenavn} helsestasjon`
                 .toLowerCase()
                 .replace(/[^a-zæøå]/g, '-')
@@ -46,7 +45,6 @@ export default async function finnSoner(adresse, sonetype) {
 
     if(sonetype === 'finnbydel') {
         adresseInfo = (dokument.result || []).map( res => ({
-            // adresse: res.adresse,
             adresse: adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
@@ -58,8 +56,6 @@ export default async function finnSoner(adresse, sonetype) {
         adresseInfo = (dokument.result || []).map( res => ({
             adresse: res.adresse,
             omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
-            // epost: `${res.omsorgsone.toLowerCase()}.helsestasjon@trondheim.kommune.no`,
-            // epostTil: "mailto:" + `${res.omsorgsone.toLowerCase()}-hjemmetj.postmottak@trondheim.kommune.no`,
             lenke: `https://trondheim.kommune.no/org/helse-og-velferd/hjemmetjenester/` + `${res.omsorgsone} hjemmetjeneste`
                 .toLowerCase()
                 .replace(/[^a-zæøå]/g, '-')
@@ -75,6 +71,14 @@ export default async function finnSoner(adresse, sonetype) {
         for(var i = 0; i < helsestasjoner.length; i++) {
             if(helsestasjoner[i].helsestasjonsonenavn === adresseInfo.helsestasjonsonenavn) {
                 adresseInfo = {...adresseInfo, ...helsestasjoner[i]};
+            }
+        }
+    }
+
+    if(sonetype === 'adresserkretser') {
+        for(var j = 0; j < omsorgssoner.length; j++) {
+            if(omsorgssoner[j].hjemmetjeneste === adresseInfo.omsorgsone) {
+                adresseInfo = {...adresseInfo, ...omsorgssoner[j]};
             }
         }
     }

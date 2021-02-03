@@ -94,7 +94,7 @@ class App extends Component {
     const inputProps = {
       placeholder: "Skriv inn adresse",
       value,
-      'aria-label': "Søk etter bydel",
+      'aria-label': "Søk",
       'aria-labelledby': "adresseSok",
       onChange: this.onChange
     };

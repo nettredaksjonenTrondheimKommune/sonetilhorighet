@@ -32,16 +32,10 @@ export default class Helsestasjon extends Component {
             <>
                 <div className="boks bla-boks margin-top senter">
                     <h3>Kontaktinformasjon</h3>
-                    <p><a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p>
-                    {/* <h4>
-                        <a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a>
-                    </h4> */}
-                    <p>Telefon: <a className="understrek" href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p>
-                    {/* <p>Telefon: <a className="understrek" href={helsestasjon.telefon}>xx xx xx xx</a></p> */}
-                    <p>Epost: <a className="understrek" href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p>
-                    {/* <p><strong>Besøksadresse</strong><br />Testvegen 99, 7044 Trondheim</p> */}
-                    <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p>
-                    {/* <p><strong>Postadresse</strong><br />{helsestasjon.helsestasjonPostadresse}</p> */}
+                    {helsestasjon.helsestasjonsonenavn ? <p><a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p> : ''}
+                    {helsestasjon.telefon ? <p>Telefon: <a className="understrek" href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
+                    {helsestasjon.epost ? <p>Epost: <a className="understrek" href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
+                    {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
                 </div>
 
                 {/* <div>

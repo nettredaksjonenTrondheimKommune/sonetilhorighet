@@ -1,0 +1,93 @@
+[
+    {
+        "hjemmetjeneste" : "Bergheim hjemmetjeneste",
+        "telefon" : "72 54 58 50",
+        "epost" : "bergheim-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:bergheim-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Brit Grytbaks veg 14, 7049 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Byåsen hjemmetjeneste",
+        "telefon" : "72 54 51 31",
+        "epost" : "byasen-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:byasen-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Havsteinekra 2, 7021 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Heimdal hjemmetjeneste",
+        "telefon" : "72 54 94 30",
+        "epost" : "heimdal-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:heimdal-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Østre Rosten 51A, 7075 Tiller"
+    },
+    {
+        "hjemmetjeneste" : "Klæbu hjemmetjeneste",
+        "telefon" : "92 80 03 98",
+        "epost" : "klabu-helse.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:klabu-helse.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Vikingvegen 10, 7540 Klæbu"
+    },
+    {
+        "hjemmetjeneste" : "Lade hjemmetjeneste",
+        "telefon" : "72 54 88 70",
+        "epost" : "lade-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "lade-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Lade alle 80, 7041 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Munkvoll hjemmetjeneste",
+        "telefon" : "72 54 52 55",
+        "epost" : "munkvoll-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:munkvoll-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Selsbakkvegen 28, 7027 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Nidarvoll hjemmetjeneste",
+        "telefon" : "72 54 90 86",
+        "epost" : "nidarvoll-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:nidarvoll-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Valøyvegen 12, 7031 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Nidelven hjemmetjeneste",
+        "telefon" : "72 54 29 80",
+        "epost" : "nidelven-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:nidelven-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Erling Skakkes gate 40B, 7013 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Saupstad hjemmetjeneste",
+        "telefon" : "72 54 79 30",
+        "epost" : "saupstad-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:saupstad-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Øvre Flatåsveg 2A, 7079 Flatåsen"
+    },
+    {
+        "hjemmetjeneste" : "Spongdal hjemmetjeneste",
+        "telefon" : "72 54 99 50",
+        "epost" : "",
+        "epostTil" : "",
+        "hjemmetjenesteBesoksadresse" : "Bråmyra 4, 7074 Spongdal"
+    },
+    {
+        "hjemmetjeneste" : "Strinda hjemmetjeneste",
+        "telefon" : "72 54 12 14",
+        "epost" : "strinda-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:strinda-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Skonnertvegen 7, 7053 Ranheim"
+    },
+    {
+        "hjemmetjeneste" : "Strindheim hjemmetjeneste",
+        "telefon" : "72 54 90 70",
+        "epost" : "strindheim-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:strindheim-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Kristine Bonnevies veg 20, 7046 Trondheim"
+    },
+    {
+        "hjemmetjeneste" : "Valentinlyst hjemmetjeneste",
+        "telefon" : "72 54 20 50",
+        "epost" : "valentinlyst-hjemmetj.postmottak@trondheim.kommune.no",
+        "epostTil" : "mailto:valentinlyst-hjemmetj.postmottak@trondheim.kommune.no",
+        "hjemmetjenesteBesoksadresse" : "Anders Estenstads veg 7, 7046 Trondheim"
+    }
+]
