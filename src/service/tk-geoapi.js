@@ -25,12 +25,16 @@ export default async function finnSoner(adresse, sonetype) {
 
     if(dokument.result.length === 0) {
         return adresseInfo = [];
-    }    
+    }
 
     if(sonetype === 'finnhelsestasjon') {
-        adresseInfo = (dokument.result || []).map( res => ({
-            // adresse: res.adresse,
-            adresse: adresse,
+        if(isNaN(adresse.charAt(adresse.length-1))) {
+            adresse = [adresse.slice(0, adresse.length-1),' ', adresse.slice(adresse.length-1)].join('');
+        }
+        
+        adresseInfo = (dokument.result || []).map(res => ({
+            // adresse: adresse,
+            adresse: res.adresse,
             // geomb: res.geom.coordinates[0],
             // geoml: res.geom.coordinates[1],
             helsestasjonsonenavn: `${res.helsestasjonsonenavn} helsestasjon`,
@@ -44,7 +48,7 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     if(sonetype === 'finnbydel') {
-        adresseInfo = (dokument.result || []).map( res => ({
+        adresseInfo = (dokument.result || []).map(res => ({
             adresse: adresse,
             geomb: res.geom.coordinates[0],
             geoml: res.geom.coordinates[1],
@@ -53,7 +57,7 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     if(sonetype === 'adresserkretser') {
-        adresseInfo = (dokument.result || []).map( res => ({
+        adresseInfo = (dokument.result || []).map(res => ({
             adresse: res.adresse,
             omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
             lenke: `https://trondheim.kommune.no/org/helse-og-velferd/hjemmetjenester/` + `${res.omsorgsone} hjemmetjeneste`
@@ -69,6 +73,10 @@ export default async function finnSoner(adresse, sonetype) {
     
     if(sonetype === 'finnhelsestasjon') {
         for(var i = 0; i < helsestasjoner.length; i++) {
+            if(adresseInfo.helsestasjonsonenavn === "Falkenborg helsestasjon") {
+                adresseInfo.helsestasjonsonenavn = "Falkenborg helsestasjon (barn 0-5 år)";
+            }
+
             if(helsestasjoner[i].helsestasjonsonenavn === adresseInfo.helsestasjonsonenavn) {
                 adresseInfo = {...adresseInfo, ...helsestasjoner[i]};
             }

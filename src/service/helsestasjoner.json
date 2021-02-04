@@ -21,11 +21,14 @@
         "helsestasjonBesoksadresse" : "Gjørtlervegen 5, 7021 Trondheim"
     },
     {
-        "helsestasjonsonenavn" : "Falkenborg helsestasjon",
+        "helsestasjonsonenavn" : "Falkenborg helsestasjon (barn 0-5 år)",
         "telefon" : "48 05 51 00",
         "epost" : "falkenborg.helsestasjon@trondheim.kommune.no",
         "epostTil" : "mailto:falkenborg.helsestasjon@trondheim.kommune.no",
-        "helsestasjonBesoksadresse" : "Peder Falcks veg 31A, 7044 Trondheim"
+        "helsestasjonBesoksadresse" : "Peder Falcks veg 31A, 7044 Trondheim",
+        "infoBFT" : "Gravid? Gå til BFT Østbyen helsestasjon",
+        "telefonnummerBFT" : "90 62 11 35",
+        "lenkeBFT" : "https://www.trondheim.kommune.no/tema/helse-og-omsorg/helsetjenester/helsestasjon/bft-ostbyen-helsestasjon/"
     },
     {
         "helsestasjonsonenavn" : "Helsestasjon for ungdom (HFU)",
