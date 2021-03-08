@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './components/sone/customStyle.css';
 import Autosuggest from 'react-autosuggest';
-import hentAlleAdresser from './service/hentAlleAdresser.js';
+import alleAdresser from './service/alleAdresser.json';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-      this.state.alleAdresser = await hentAlleAdresser()
+
   }
 
   litenListeMedAdresser(liste) {
@@ -72,7 +72,7 @@ class App extends Component {
   };
 
   onSuggestionsFetchRequested = async ({ value }) => {
-      const adresseforslag =  this.finnAdresserSomStarterMed(this.state.alleAdresser, "adresse", value);
+      const adresseforslag =  this.finnAdresserSomStarterMed(alleAdresser, "adresse", value);
       const isInputBlank = value.trim() === '';
       const ingenAdresseforslag = !isInputBlank && adresseforslag.length === 0;
 
