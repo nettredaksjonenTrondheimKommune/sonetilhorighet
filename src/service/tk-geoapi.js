@@ -14,12 +14,18 @@ const AUTH_HEADER = {
 export default async function finnSoner(adresse, sonetype) {
     let forventetVerdi = adresse.trim().toLowerCase();
 
-    if (adresse === '') {
+    if (forventetVerdi === '') {
         throw new Error('Invalid adress');
     }
 
-    const url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
-    const dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+    var url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
+    var dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+
+    if(dokument.totaltAntallTreff === 0) {
+        if (forventetVerdi.match(/ [0-9]/) !== null) {
+            return finnSoner(adresse.slice(0, adresse.length-1), sonetype);
+        }
+    }
 
     var adresseInfo = [];
 
@@ -31,7 +37,7 @@ export default async function finnSoner(adresse, sonetype) {
         if(isNaN(adresse.charAt(adresse.length-1))) {
             adresse = [adresse.slice(0, adresse.length-1),' ', adresse.slice(adresse.length-1)].join('');
         }
-        
+
         adresseInfo = (dokument.result || []).map(res => ({
             // adresse: adresse,
             adresse: res.adresse,
@@ -70,7 +76,7 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     adresseInfo = adresseInfo.find(( a ) => a.adresse === adresse);
-    
+
     if(sonetype === 'finnhelsestasjon') {
         for(var i = 0; i < helsestasjoner.length; i++) {
             if(adresseInfo.helsestasjonsonenavn === "Falkenborg helsestasjon") {
