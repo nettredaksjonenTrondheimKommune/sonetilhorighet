@@ -34,10 +34,6 @@ export default async function finnSoner(adresse, sonetype) {
     }
 
     if(sonetype === 'finnhelsestasjon') {
-        if(isNaN(adresse.charAt(adresse.length-1))) {
-            adresse = [adresse.slice(0, adresse.length-1),' ', adresse.slice(adresse.length-1)].join('');
-        }
-
         adresseInfo = (dokument.result || []).map(res => ({
             // adresse: adresse,
             adresse: res.adresse,
@@ -77,7 +73,7 @@ export default async function finnSoner(adresse, sonetype) {
 
     adresseInfo = adresseInfo.find(( a ) => a.adresse === adresse);
 
-    if(sonetype === 'finnhelsestasjon') {
+    if(sonetype === 'finnhelsestasjon') { 
         for(var i = 0; i < helsestasjoner.length; i++) {
             if(adresseInfo.helsestasjonsonenavn === "Falkenborg helsestasjon") {
                 adresseInfo.helsestasjonsonenavn = "Falkenborg helsestasjon (barn 0-5 år)";
