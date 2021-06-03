@@ -9,13 +9,13 @@ import Omsorgssone from './components/sone/omsorgssone';
 
 ReactDOM.render(
     <App
-        renderChildren={(adresse) => (
+        renderChildren={(adresse, altAdresse) => (
             <>
-                <Helsestasjon adresse={adresse} />
+                <Helsestasjon adresse={adresse} altAdresse={altAdresse} />
 
-                <Bydel adresse={adresse} />
+                <Bydel adresse={adresse} altAdresse={altAdresse} />
 
-                <Omsorgssone adresse={adresse} />
+                <Omsorgssone adresse={adresse} altAdresse={altAdresse} />
             </>
         )}
     

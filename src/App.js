@@ -12,8 +12,10 @@ class App extends Component {
       adresseforslag: [],
       ingenAdresseforslag: false,
       adresse: '',
+      altAdresse: '',
       visResultat: false,
-      alleAdresser: []
+      alleAdresser: [],
+      litenListe: []
     };
   }
 
@@ -39,16 +41,17 @@ class App extends Component {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  finnAdresserSomStarterMed(liste, key, adresse) {
-      var forventetVerdi = this.forventetRegexSymbol(adresse.trim());
-      forventetVerdi = forventetVerdi.toLowerCase();
-      const regex = new RegExp('^' + forventetVerdi, 'i');
+  finnAdresserSomStarterMed(adresseListe, key, adresse) {
+    var forventetVerdi = this.forventetRegexSymbol(adresse.trim());
+    forventetVerdi = forventetVerdi.toLowerCase();
+    const regex = new RegExp('^' + forventetVerdi, 'i');
 
-      liste = liste.filter(res => regex.test(res));
-      var litenListe = [];
-      litenListe = this.litenListeMedAdresser(liste);
+    var listeEtterSok = adresseListe.filter(liste => liste.lowerCaseAdresse.startsWith(forventetVerdi));
 
-      return litenListe;
+    this.litenListe = this.litenListeMedAdresser(listeEtterSok);
+    var listeMedFem = this.litenListe.map(liste => liste.adresse);
+
+    return listeMedFem;
   }
 
   getSuggestionValue = forslag => forslag;
@@ -58,10 +61,18 @@ class App extends Component {
   );
 
   onSuggestionSelected = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-      this.setState({
-        adresse: suggestionValue,
-        visResultat: true
-      });
+    var alt = '';
+    for (var i = 0; i < this.litenListe.length; i++) {
+      if (this.litenListe[i].adresse === suggestionValue) {
+        alt = this.litenListe[i].orginalAdresse;
+      }
+    }
+
+    this.setState({
+      adresse: suggestionValue,
+      altAdresse: alt,
+      visResultat: true
+    });
   };
 
   onChange = (event, { newValue, method }) => {
@@ -72,25 +83,25 @@ class App extends Component {
   };
 
   onSuggestionsFetchRequested = async ({ value }) => {
-      const adresseforslag =  this.finnAdresserSomStarterMed(alleAdresser, "adresse", value);
-      const isInputBlank = value.trim() === '';
-      const ingenAdresseforslag = !isInputBlank && adresseforslag.length === 0;
+    const adresseforslag =  this.finnAdresserSomStarterMed(alleAdresser, "adresse", value);
+    const isInputBlank = value.trim() === '';
+    const ingenAdresseforslag = !isInputBlank && adresseforslag.length === 0;
 
-      this.setState({
-          adresseforslag,
-          ingenAdresseforslag
-      });
+    this.setState({
+        adresseforslag,
+        ingenAdresseforslag
+    });
   };
 
   onSuggestionsClearRequested = () => {
-      this.setState({
-          adresseforslag: []
-      });
+    this.setState({
+        adresseforslag: []
+    });
   };
 
   render() {
     const { renderChildren } = this.props;
-    const { value, adresseforslag, ingenAdresseforslag, adresse, visResultat } = this.state;
+    const { value, adresseforslag, ingenAdresseforslag, adresse, altAdresse, visResultat } = this.state;
     const inputProps = {
       placeholder: "Skriv inn adresse",
       value,
@@ -122,7 +133,7 @@ class App extends Component {
         </div>
 
         {
-          visResultat && renderChildren(adresse)
+          visResultat && renderChildren(adresse, altAdresse)
         }
       </div>
     );

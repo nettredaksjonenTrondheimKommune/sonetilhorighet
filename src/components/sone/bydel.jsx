@@ -32,6 +32,7 @@ export default class Bydel extends Component {
 
         this.state = {
             adresse: '',
+            altAdresse: '',
             bydel: {},
             url: '',
             selectedOption: {
@@ -53,14 +54,14 @@ export default class Bydel extends Component {
 
     async hentBydel() {
         this.setState({
-            bydel: await finnSoner(this.props.adresse, 'finnbydel')
+            bydel: await finnSoner(this.props.adresse, this.props.altAdresse, 'finnbydel')
         });
 
         if(this.state.bydel.length === 0) {
             this.state.adresse = this.props.adresse.replace(/(?<=[0-9])(?=[A-Za-z])/).slice(0, this.props.adresse.length-1);
             
             this.setState({
-                bydel: await finnSoner(this.state.adresse, 'finnbydel')
+                bydel: await finnSoner(this.props.adresse, this.props.altAdresse, 'finnbydel')
             });
         }
 

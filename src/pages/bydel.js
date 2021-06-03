@@ -7,8 +7,8 @@ import Bydel from '../components/sone/bydel';
 // eslint-disable-next-line react/jsx-filename-extension
 ReactDOM.render(
   <App
-    renderChildren={(adresse) => (
-      <Bydel adresse={adresse} />
+    renderChildren={(adresse, altAdresse) => (
+      <Bydel adresse={adresse} altAdresse={altAdresse}  />
     )}
   />,
   document.getElementById('tk-bydel'),

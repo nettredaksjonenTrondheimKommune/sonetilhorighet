@@ -11,7 +11,7 @@ const AUTH_HEADER = {
     'X-API-KEY': 'oz4_500oOHb-vbI6ib8-nFlexij68-C-KOXEMkFALy4=',
 };
 
-export default async function finnSoner(adresse, sonetype) {
+export default async function finnSoner(adresse, altAdresse, sonetype) {
     let forventetVerdi = adresse.trim().toLowerCase();
 
     if (forventetVerdi === '') {
@@ -23,7 +23,14 @@ export default async function finnSoner(adresse, sonetype) {
 
     if(dokument.totaltAntallTreff === 0) {
         if (forventetVerdi.match(/ [0-9]/) !== null) {
-            return finnSoner(adresse.slice(0, adresse.length-1), sonetype);
+            return finnSoner(adresse.slice(0, adresse.length-1), altAdresse, sonetype);
+        }
+
+        if(sonetype === 'finnhelsestasjon' || sonetype === 'adresserkretser') {
+            forventetVerdi = altAdresse.trim().toLowerCase();
+            url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
+            dokument = await fetchJSON(url, { headers: AUTH_HEADER });
+            console.log(dokument);
         }
     }
 
@@ -71,9 +78,9 @@ export default async function finnSoner(adresse, sonetype) {
         }));
     }
 
-    adresseInfo = adresseInfo.find(( a ) => a.adresse === adresse);
+    adresseInfo = adresseInfo.find(a  => a.adresse === adresse || altAdresse);
 
-    if(sonetype === 'finnhelsestasjon') { 
+    if(sonetype === 'finnhelsestasjon') {
         for(var i = 0; i < helsestasjoner.length; i++) {
             if(adresseInfo.helsestasjonsonenavn === "Falkenborg helsestasjon") {
                 adresseInfo.helsestasjonsonenavn = "Falkenborg helsestasjon (barn 0-5 år)";

@@ -7,8 +7,8 @@ import Omsorgssone from '../components/sone/omsorgssone';
 // eslint-disable-next-line react/jsx-filename-extension
 ReactDOM.render(
   <App
-    renderChildren={(adresse) => (
-      <Omsorgssone adresse={adresse} />
+    renderChildren={(adresse, altAdresse) => (
+      <Omsorgssone adresse={adresse} altAdresse={altAdresse}  />
     )}
   />,
   document.getElementById('tk-omsorgssone'),

@@ -8,6 +8,7 @@ export default class Helsestasjon extends Component {
 
         this.state = {
             adresse: '',
+            altAdresse: '',
             helsestasjon: {}
         };
     }
@@ -17,12 +18,10 @@ export default class Helsestasjon extends Component {
     }
 
     async hentHelsestasjon() {
-        this.state.adresse = this.props.adresse.split(/(?<=[0-9])(?=[A-Za-z])/).join(" ");
-
         this.setState({
-            helsestasjon: await finnSoner(this.state.adresse, 'finnhelsestasjon')
+            helsestasjon: await finnSoner(this.props.adresse, this.props.altAdresse, 'finnhelsestasjon')
         });
-        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.helsestasjon.geoml + "/" + this.state.helsestasjon.geomb + "/topo_graa-helsestasjonsone";
+        // this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.helsestasjon.geoml + "/" + this.state.helsestasjon.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {

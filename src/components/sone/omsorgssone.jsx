@@ -8,6 +8,7 @@ export default class Omsorgssone extends Component {
 
         this.state = {
             adresse: '',
+            altAdresse: '',
             omsorgssone: {}
         };
     }
@@ -17,12 +18,10 @@ export default class Omsorgssone extends Component {
     }
 
     async hentOmsorgssone() {
-        this.state.adresse = this.props.adresse.split(/(?<=[0-9])(?=[A-Za-z])/).join(" ");
-
         this.setState({
-            omsorgssone: await finnSoner(this.state.adresse, 'adresserkretser')
+            omsorgssone: await finnSoner(this.props.adresse, this.props.altAdresse, 'adresserkretser')
         });
-        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.omsorgssone.geoml + "/" + this.state.omsorgssone.geomb + "/topo_graa-helsestasjonsone";
+        // this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.omsorgssone.geoml + "/" + this.state.omsorgssone.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {
