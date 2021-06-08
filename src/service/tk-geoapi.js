@@ -30,7 +30,6 @@ export default async function finnSoner(adresse, altAdresse, sonetype) {
             forventetVerdi = altAdresse.trim().toLowerCase();
             url = `${BASE_URL}/${sonetype}/${encodeURIComponent(forventetVerdi)}`;
             dokument = await fetchJSON(url, { headers: AUTH_HEADER });
-            console.log(dokument);
         }
     }
 
@@ -78,7 +77,7 @@ export default async function finnSoner(adresse, altAdresse, sonetype) {
         }));
     }
 
-    adresseInfo = adresseInfo.find(a  => a.adresse === adresse || altAdresse);
+    adresseInfo = adresseInfo.find(a  => a.adresse === adresse || a.adresse === altAdresse);
 
     if(sonetype === 'finnhelsestasjon') {
         for(var i = 0; i < helsestasjoner.length; i++) {
