@@ -1,30 +1,6 @@
 import React, { Component } from 'react';
 import './customStyle.css';
 import finnSoner from '../../service/tk-geoapi';
-// import Select from 'react-select';
-
-// const options = [
-//     {
-//         label: "- Ikke valgt -",
-//         value: ""
-//     },
-//     {
-//       label: "Heimdal",
-//       value: "heimdal"
-//     },
-//     {
-//       label: "Lerkendal",
-//       value: "lerkendal"
-//     },
-//     {
-//       label: "Midtbyen",
-//       value: "midtbyen"
-//     },
-//     {
-//       label: "Østbyen",
-//       value: "østbyen"
-//     }
-// ];
 
 export default class Bydel extends Component {
     constructor(props) {
@@ -33,20 +9,9 @@ export default class Bydel extends Component {
         this.state = {
             adresse: '',
             altAdresse: '',
-            bydel: {},
-            url: '',
-            selectedOption: {
-                label: "- Ikke valgt -",
-                value: ""
-            }
+            bydel: {}
         };
-
-        this.handleChange = this.handleChange.bind(this);
     }
-    
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-    };
 
     async componentDidMount() {
         await this.hentBydel();
@@ -64,37 +29,19 @@ export default class Bydel extends Component {
                 bydel: await finnSoner(this.props.adresse, this.props.altAdresse, 'finnbydel')
             });
         }
-
-        this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.bydel.geoml + "/" + this.state.bydel.geomb + "/topo_graa-bydel";
     }
 
     render() {
         const { bydel } = this.state;
-        // const { bydel, url, selectedOption } = this.state;
-        // const placeholder = "Velg en bydel";
 
         return (bydel.length === 0
             ? <div className="boks bla-boks margin-top senter"><h4>Vi finner ingen bydel som hører til denne adressen!</h4></div>
             :
             <>
                 <div className="boks bla-boks margin-top senter">
-                    <h4>
-                        {bydel.bydelnavn}
-                    </h4>
-
-                    {/* <label htmlFor="velgBydel">Hvilken bydel tilhører du?</label>
-                    <Select
-                        inputId="velgBydel"
-                        value={selectedOption}
-                        onChange={this.handleChange}
-                        options={options}
-                        placeholder={placeholder}
-                    /> */}
+                    <h3>Bydel</h3>
+                    {bydel.bydelnavn ? <p>{bydel.bydelnavn}</p> : ''}
                 </div>
-
-                {/* <div>
-                    <iframe height="500px" width="100%" title="Kart" src={url}></iframe>
-                </div> */}
             </>
         )
     }

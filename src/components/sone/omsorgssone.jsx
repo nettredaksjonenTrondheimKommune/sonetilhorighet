@@ -21,7 +21,6 @@ export default class Omsorgssone extends Component {
         this.setState({
             omsorgssone: await finnSoner(this.props.adresse, this.props.altAdresse, 'adresserkretser')
         });
-        // this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.omsorgssone.geoml + "/" + this.state.omsorgssone.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {
@@ -33,15 +32,11 @@ export default class Omsorgssone extends Component {
             <>
                 <div className="boks bla-boks margin-top senter">
                     <h3>Kontaktinformasjon</h3>
-                    {omsorgssone.omsorgsone ? <p><a className="understrek" href={omsorgssone.lenke}>{omsorgssone.omsorgsone}</a></p> : ''}
+                    {omsorgssone.omsorgsone ? <p><a className="understrek" href={omsorgssone.lenkeHjemmetjeneste}>{omsorgssone.omsorgsone}</a></p> : ''}
                     {omsorgssone.telefon ? <p>Telefon: <a className="understrek" href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
                     {omsorgssone.epost ? <p>Epost: <a className="understrek" href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}
                     {omsorgssone.hjemmetjenesteBesoksadresse ? <p><strong>Besøksadresse</strong><br />{omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
                 </div>
-
-                {/* <div>
-                    <iframe height="500px" width="500px" title="Kart" src="https://kart.trondheim.kommune.no/map/helse_oms/#11/63.4200/10.3999/topo_graa-helsestasjonsone"></iframe>
-                </div> */}
             </>
         )
     }

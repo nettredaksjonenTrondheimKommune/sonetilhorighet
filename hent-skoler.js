@@ -20,7 +20,7 @@ async function main() {
         .map(enhet => JSON.parse(enhet))
         .map(enhet => ({ name: enhet.PageName, url: enhet.PageUrl }))
 
-    fs.writeFileSync("src/skoler.json", JSON.stringify(skoler))
+    fs.writeFileSync("src/service/skoler.json", JSON.stringify(skoler))
 
     console.log("Skrev til src/skoler.json")
 }

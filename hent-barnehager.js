@@ -32,7 +32,7 @@ async function main() {
     let coordinates = await Promise.all(barnehager.map(get_coordinate_from_kartverket))
     barnehager = barnehager.map((barnehage, i) => ({ ...barnehage, ...coordinates[i]}))
 
-    fs.writeFileSync("src/barnehager.json", JSON.stringify(barnehager))
+    fs.writeFileSync("src/service/barnehager.json", JSON.stringify(barnehager))
 
     console.log(`Skrev ${barnehager.length} barnehager til til src/barnehager.json`)
 }

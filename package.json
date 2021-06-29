@@ -1,6 +1,6 @@
 {
   "name": "sonetilhorighet",
-  "version": "0.31.13",
+  "version": "0.31.15",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -9,6 +9,7 @@
     "bootstrap": "^3.4.1",
     "file-system": "^2.2.2",
     "node-fetch": "^2.6.1",
+    "proj4": "^2.7.4",
     "react": "^16.13.1",
     "react-autosuggest": "^10.0.2",
     "react-bootstrap-typeahead": "^4.2.3",

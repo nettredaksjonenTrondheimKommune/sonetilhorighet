@@ -44,7 +44,7 @@ class App extends Component {
   finnAdresserSomStarterMed(adresseListe, key, adresse) {
     var forventetVerdi = this.forventetRegexSymbol(adresse.trim());
     forventetVerdi = forventetVerdi.toLowerCase();
-    const regex = new RegExp('^' + forventetVerdi, 'i');
+    // const regex = new RegExp('^' + forventetVerdi, 'i');
 
     var listeEtterSok = adresseListe.filter(liste => liste.lowerCaseAdresse.startsWith(forventetVerdi));
 

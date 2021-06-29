@@ -86,3 +86,11 @@
 .senter {
   text-align: center;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.venstrestilt {
+  text-align: left;
+}

@@ -21,7 +21,6 @@ export default class Helsestasjon extends Component {
         this.setState({
             helsestasjon: await finnSoner(this.props.adresse, this.props.altAdresse, 'finnhelsestasjon')
         });
-        // this.state.url = "https://kart.trondheim.kommune.no/map/helse_oms/#13/" + this.state.helsestasjon.geoml + "/" + this.state.helsestasjon.geomb + "/topo_graa-helsestasjonsone";
     }
 
     render() {
@@ -39,10 +38,6 @@ export default class Helsestasjon extends Component {
                     {helsestasjon.epost ? <p>Epost: <a className="understrek" href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
                     {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
                 </div>
-
-                {/* <div>
-                    <iframe height="500px" width="500px" title="Kart" src="https://kart.trondheim.kommune.no/map/helse_oms/#11/63.4200/10.3999/topo_graa-helsestasjonsone"></iframe>
-                </div> */}
             </>
         )
     }
