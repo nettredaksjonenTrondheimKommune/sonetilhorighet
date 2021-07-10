@@ -30,8 +30,9 @@ export default class Omsorgssone extends Component {
             ? <div></div>
             :
             <>
-                <div className="boks bla-boks margin-top senter">
-                    <h3>Kontaktinformasjon</h3>
+                <div className="boks bla-boks margin-top text-center">
+                    <h3>Hjemmetjeneste</h3>
+                    <h4>Kontaktinformasjon</h4>
                     {omsorgssone.omsorgsone ? <p><a className="understrek" href={omsorgssone.lenkeHjemmetjeneste}>{omsorgssone.omsorgsone}</a></p> : ''}
                     {omsorgssone.telefon ? <p>Telefon: <a className="understrek" href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
                     {omsorgssone.epost ? <p>Epost: <a className="understrek" href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}

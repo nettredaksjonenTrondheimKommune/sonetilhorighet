@@ -135,6 +135,13 @@ function removeOrMergeDuplicates(calendar) {
         };
         filtered.push(mergedEntry);
 
+        for (var i = 0; i < filtered.length; i++) {
+            var start = filtered[i].date_week_start.split('-');
+            filtered[i].date_week_start = start[2] + "." + start[1] + "." + start[0];
+            var slutt = filtered[i].date_week_end.split('-');
+            filtered[i].date_week_end = slutt[2] + "." + slutt[1] + "." + slutt[0];
+        }
+
         return filtered;
     }, []);
 }

@@ -5,7 +5,7 @@ import barnehagerRaw from '../../service/barnehager.json';
 const defaultState = {
     coordinate: null,
     barnehager: [],
-    shownBarnehager: 5,
+    synligeBarnehager: 5,
 };
 export default class Barnehage extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ export default class Barnehage extends React.Component {
         this._ismounted = false;
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         const { adresse } = this.props;
         if (nextProps.adresse !== adresse) {
             this.setState({ ...defaultState });
@@ -54,18 +54,18 @@ export default class Barnehage extends React.Component {
     };
 
     render() {
-        const { shownBarnehager: showNBarnehager, barnehager } = this.state;
-        const visibleBarnehager = barnehager.slice(0, showNBarnehager);
-        const showMoreButton = showNBarnehager < barnehager.length;
+        const { synligeBarnehager: shownBarnehager, barnehager } = this.state;
+        const visibleBarnehager = barnehager.slice(0, shownBarnehager);
+        const visMerKnapp = shownBarnehager < barnehager.length;
 
         return (
-            <div className="boks bla-boks margin-top senter">
+            <div className="boks bla-boks margin-top text-center">
                 <h3>Nærmeste barnehager</h3>
                 {visibleBarnehager.map((barnehage, index) => (
                     <p key={index}><a href={barnehage.url}>{barnehage.name}</a>, avstand i luftlinje: {prettyDistance(barnehage.distance)}</p>
                 ))}
-                {showMoreButton && (
-                    <button type="button" className="btn btn-primary" onClick={() => this.setState({ showNBarnehager: showNBarnehager + 5 })}>Vis mer</button>
+                {visMerKnapp && (
+                    <button type="button" className="btn btn-primary" onClick={() => this.setState({ synligeBarnehager: shownBarnehager + 5 })}>Vis mer</button>
                 )}
             </div>
         );

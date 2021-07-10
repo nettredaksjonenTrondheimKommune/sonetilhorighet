@@ -112,7 +112,7 @@ class App extends Component {
 
     return (
       <div className="content">
-        <div className="boks bla-boks senter">
+        <div className="boks bla-boks text-center">
           <h3 id="adresseSok">Søk opp via adressen din</h3>
           <Autosuggest
             suggestions={adresseforslag}
