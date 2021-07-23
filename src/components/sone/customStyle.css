@@ -3,8 +3,13 @@
   width: 100%;
 }
   
-.boks[class*=bla-] {
+.boks[class*=bla-boks] {
   padding: 5% 13% 5% 13%;
+}
+
+.boks-tommekalender {
+  background: #e9f1f7;
+  padding: 5% 3% 5% 3%;
 }
 
 .margin-top {
@@ -81,4 +86,12 @@
 .understrek {
   text-decoration: underline;
   color: #055fa5;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(odd) {
+  background: #ffffff;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(even) {
+  background: #f5f5f5;
 }

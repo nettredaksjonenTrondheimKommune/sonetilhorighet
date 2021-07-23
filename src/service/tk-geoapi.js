@@ -84,10 +84,6 @@ export default async function finnSoner(adresse, altAdresse, sonetype) {
 
     if (sonetype === 'finnhelsestasjon') {
         for (var i = 0; i < helsestasjoner.length; i++) {
-            if (adresseInfo.helsestasjonsonenavn === "Falkenborg helsestasjon") {
-                adresseInfo.helsestasjonsonenavn = "Falkenborg helsestasjon (barn 0-5 år)";
-            }
-
             if (helsestasjoner[i].helsestasjonsonenavn === adresseInfo.helsestasjonsonenavn) {
                 adresseInfo = { ...adresseInfo, ...helsestasjoner[i] };
             }

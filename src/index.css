@@ -16,3 +16,10 @@ code {
   max-width: 500px;
   margin: auto;
 }
+
+@media (max-width: 768px) {
+  .content {
+    max-width: 100%;
+    margin: auto;
+  }
+}

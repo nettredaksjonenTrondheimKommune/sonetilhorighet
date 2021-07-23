@@ -31,8 +31,8 @@ export default class Helsestasjon extends Component {
             :
             <>
                 <div className="boks bla-boks margin-top text-center">
-                    <h3>Kontaktinformasjon</h3>
-                    {helsestasjon.infoBFT ? <p><a className="understrek" href={helsestasjon.lenkeBFT}>{helsestasjon.infoBFT}</a> eller ring <a className="understrek" href={helsestasjon.telefonnummerBFT}>{helsestasjon.telefonnummerBFT}</a></p> : ''}
+                    <h3>Helsestasjon</h3>
+                    <h4>Kontaktinformasjon</h4>
                     {helsestasjon.helsestasjonsonenavn ? <p><a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p> : ''}
                     {helsestasjon.telefon ? <p>Telefon: <a className="understrek" href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
                     {helsestasjon.epost ? <p>Epost: <a className="understrek" href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
