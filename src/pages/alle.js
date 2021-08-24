@@ -4,6 +4,7 @@ import App from '../App';
 import '../components/sone/customStyle.css';
 import Barnehage from '../components/sone/barnehage';
 import Bydel from '../components/sone/bydel';
+import Kirkesogn from '../components/sone/kirkesogn';
 import Helsestasjon from '../components/sone/helsestasjon';
 import Omsorgssone from '../components/sone/omsorgssone';
 import Skole from '../components/sone/skole';
@@ -16,6 +17,7 @@ ReactDOM.render(
         <>
             <Barnehage adresse={adresse} altAdresse={altAdresse}  />
             <Bydel adresse={adresse} altAdresse={altAdresse}  />
+            <Kirkesogn adresse={adresse} altAdresse={altAdresse}  />
             <Helsestasjon adresse={adresse} altAdresse={altAdresse}  />
             <Omsorgssone adresse={adresse} altAdresse={altAdresse}  />
             <Skole adresse={adresse} altAdresse={altAdresse}  />
