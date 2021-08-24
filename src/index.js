@@ -5,6 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import Helsestasjon from './components/sone/helsestasjon';
 import Bydel from './components/sone/bydel';
+import Kirkesogn from './components/sone/kirkesogn';
 import Omsorgssone from './components/sone/omsorgssone';
 import Skole from './components/sone/skole';
 import Barnehage from './components/sone/barnehage';
@@ -17,6 +18,8 @@ ReactDOM.render(
                 <Helsestasjon adresse={adresse} altAdresse={altAdresse} />
 
                 <Bydel adresse={adresse} altAdresse={altAdresse} />
+
+                <Kirkesogn adresse={adresse} altAdresse={altAdresse} />
 
                 <Omsorgssone adresse={adresse} altAdresse={altAdresse} />
 

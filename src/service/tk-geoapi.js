@@ -68,7 +68,7 @@ export default async function finnSoner(adresse, altAdresse, sonetype) {
             omsorgsone: `${res.omsorgsone} hjemmetjeneste`,
             barneskolekrets: res.barneskolekrets.toLowerCase(),
             ungdomskolekrets: res.ungdomskolekrets.toLowerCase(),
-            valgkrets: res.Valgkrets.toLowerCase(),
+            kirkesogn: res.Kirkesogn,
             lenkeHjemmetjeneste: `https://trondheim.kommune.no/org/helse-og-velferd/hjemmetjenester/` + `${res.omsorgsone}-hjemmetjeneste`
                 .toLowerCase()
                 .replace(/[^a-zæøå]/g, '-')

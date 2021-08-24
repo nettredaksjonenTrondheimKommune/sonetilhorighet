@@ -18,6 +18,7 @@ export default async function fetchPlaner(adresse, dispatch = noop) {
         bestMatchFirst(planer, adresse);
 
         dispatch(reportFetchSuccess(SERVICE_NAME));
+        console.log(planer);
         return planer;
     } catch (error) {
         dispatch(reportFetchError(SERVICE_NAME, error));
