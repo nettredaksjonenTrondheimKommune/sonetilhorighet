@@ -58,11 +58,13 @@ export default class Barnehage extends React.Component {
         const visibleBarnehager = barnehager.slice(0, shownBarnehager);
         const visMerKnapp = shownBarnehager < barnehager.length;
 
-        return (
-            <div className="boks bla-boks margin-top text-center">
+        return ( visibleBarnehager.length === 0
+            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen barnehager som hører til denne adressen!</h4></div>
+            :
+            <div className="box bg-blue margin-top text-center">
                 <h3>Nærmeste barnehager</h3>
                 {visibleBarnehager.map((barnehage, index) => (
-                    <p key={index}><a href={barnehage.url}>{barnehage.name}</a>, avstand i luftlinje: {prettyDistance(barnehage.distance)}</p>
+                    <p key={index}><a href={barnehage.url}>{barnehage.name}</a>,<br /> avstand i luftlinje: {prettyDistance(barnehage.distance)}</p>
                 ))}
                 {visMerKnapp && (
                     <button type="button" className="btn btn-primary" onClick={() => this.setState({ synligeBarnehager: shownBarnehager + 5 })}>Vis mer</button>

@@ -27,18 +27,16 @@ export default class Omsorgssone extends Component {
         const { omsorgssone } = this.state;
 
         return (omsorgssone.length === 0
-            ? <div></div>
+            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen hjemmetjeneste som hører til denne adressen!</h4></div>
             :
-            <>
-                <div className="boks bla-boks margin-top text-center">
-                    <h3>Hjemmetjeneste</h3>
-                    <h4>Kontaktinformasjon</h4>
-                    {omsorgssone.omsorgsone ? <p><a className="understrek" href={omsorgssone.lenkeHjemmetjeneste}>{omsorgssone.omsorgsone}</a></p> : ''}
-                    {omsorgssone.telefon ? <p>Telefon: <a className="understrek" href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
-                    {omsorgssone.epost ? <p>Epost: <a className="understrek" href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}
-                    {omsorgssone.hjemmetjenesteBesoksadresse ? <p><strong>Besøksadresse</strong><br />{omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
-                </div>
-            </>
+            <div className="box bg-blue margin-top text-center">
+                <h3>Hjemmetjeneste</h3>
+                <h4>Kontaktinformasjon</h4>
+                {omsorgssone.omsorgsone ? <p><a href={omsorgssone.lenkeHjemmetjeneste}>{omsorgssone.omsorgsone}</a></p> : ''}
+                {omsorgssone.telefon ? <p>Telefon: <a href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
+                {omsorgssone.epost ? <p>Epost: <a href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}
+                {omsorgssone.hjemmetjenesteBesoksadresse ? <p><strong>Besøksadresse</strong><br />{omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
+            </div>
         )
     }
 }

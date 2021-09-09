@@ -27,18 +27,16 @@ export default class Helsestasjon extends Component {
         const { helsestasjon } = this.state;
 
         return (helsestasjon.length === 0
-            ? <div></div>
+            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen helsestasjon som hører til denne adressen!</h4></div>
             :
-            <>
-                <div className="boks bla-boks margin-top text-center">
-                    <h3>Helsestasjon</h3>
-                    <h4>Kontaktinformasjon</h4>
-                    {helsestasjon.helsestasjonsonenavn ? <p><a className="understrek" href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p> : ''}
-                    {helsestasjon.telefon ? <p>Telefon: <a className="understrek" href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
-                    {helsestasjon.epost ? <p>Epost: <a className="understrek" href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
-                    {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
-                </div>
-            </>
+            <div className="box bg-blue margin-top text-center">
+                <h3>Helsestasjon</h3>
+                <h4>Kontaktinformasjon</h4>
+                {helsestasjon.helsestasjonsonenavn ? <p><a href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p> : ''}
+                {helsestasjon.telefon ? <p>Telefon: <a href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
+                {helsestasjon.epost ? <p>Epost: <a href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
+                {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
+            </div>
         )
     }
 }

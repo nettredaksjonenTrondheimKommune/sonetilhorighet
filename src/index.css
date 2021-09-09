@@ -15,6 +15,12 @@ code {
 .content {
   max-width: 500px;
   margin: auto;
+  font-size: 1.6rem;
+}
+
+.content p a {
+  text-decoration: underline;
+  color: #055fa5;
 }
 
 @media (max-width: 768px) {
