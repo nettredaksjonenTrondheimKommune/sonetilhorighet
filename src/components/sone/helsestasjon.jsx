@@ -33,9 +33,11 @@ export default class Helsestasjon extends Component {
                 <h3>Helsestasjon</h3>
                 <h4>Kontaktinformasjon</h4>
                 {helsestasjon.helsestasjonsonenavn ? <p><a href={helsestasjon.lenke}>{helsestasjon.helsestasjonsonenavn}</a></p> : ''}
-                {helsestasjon.telefon ? <p>Telefon: <a href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
-                {helsestasjon.epost ? <p>Epost: <a href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
-                {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
+                {helsestasjon.telefon ? <p><strong>Telefon:</strong> <a href={helsestasjon.telefon}>{helsestasjon.telefon}</a></p> : ''}
+                {helsestasjon.epost ? <p><strong>E-post helsestasjon (0-6 år):</strong><br /><a href={helsestasjon.epostTil}>{helsestasjon.epost}</a></p> : ''}
+                {helsestasjon.helsestasjonBesoksadresse ? <p><strong>Besøksadresse helsestasjon (0-6 år):</strong><br />{helsestasjon.helsestasjonBesoksadresse}</p> : ''}
+                {helsestasjon.epostJordmor ? <p><strong>E-post jordmor:</strong><br /><a href={helsestasjon.epostJordmorTil}>{helsestasjon.epostJordmor}</a></p> : ''}
+                {helsestasjon.jordmorBesoksadresse ? <p><strong>Besøksadresse jordmor:</strong><br />{helsestasjon.jordmorBesoksadresse}</p> : ''}
             </div>
         )
     }
