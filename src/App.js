@@ -135,6 +135,9 @@ class App extends Component {
         {
           visResultat && renderChildren(adresse, altAdresse)
         }
+        {/* {
+          renderChildren()
+        } */}
       </div>
     );
   }

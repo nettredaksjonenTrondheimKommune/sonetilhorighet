@@ -38,6 +38,7 @@ const plugins = [
 ];
 
 const entrypoints = ['alle', 'barnehage', 'bydel', 'helsestasjon', 'omsorgssone', 'skole', 'tommekalender'];
+// const entrypoints = ['bilpooltesten'];
 
 export default entrypoints.map((name) => ({
   input: `src/pages/${name}.js`,

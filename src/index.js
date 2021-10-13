@@ -10,6 +10,7 @@ import Omsorgssone from './components/sone/omsorgssone';
 import Skole from './components/sone/skole';
 import Barnehage from './components/sone/barnehage';
 import Tommekalender from './components/sone/tommekalender';
+// import Bilpooltesten from './components/annet/bilpooltesten';
 
 ReactDOM.render(
     <App
@@ -28,6 +29,8 @@ ReactDOM.render(
                 <Barnehage adresse={adresse} altAdresse={altAdresse} />
 
                 <Tommekalender adresse={adresse} altAdresse={altAdresse} />
+
+                {/* <Bilpooltesten /> */}
             </>
         )}
     
