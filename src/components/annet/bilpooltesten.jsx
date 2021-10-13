@@ -12,7 +12,6 @@ export default class Barnehage extends React.Component {
             service: 0,
             dine_kostnader: 0,
             timer_kan_du_leie_bil: 0,
-            dogn_du_kan_leie_bil: 0,
             vis_timer_kan_du_leie_bil: false
         };
 
@@ -48,18 +47,16 @@ export default class Barnehage extends React.Component {
         }
 
         var timer_kan_du_leie_bil = parseInt(this.state.dine_kostnader / 100);
-        var dogn_du_kan_leie_bil = parseInt(timer_kan_du_leie_bil / 24);
 
         this.setState({
             timer_kan_du_leie_bil: timer_kan_du_leie_bil,
-            dogn_du_kan_leie_bil: dogn_du_kan_leie_bil,
             vis_timer_kan_du_leie_bil: true
         })
         event.preventDefault();
     }
 
     render() {
-        const { vis_timer_kan_du_leie_bil, dogn_du_kan_leie_bil, timer_kan_du_leie_bil } = this.state;
+        const { vis_timer_kan_du_leie_bil, timer_kan_du_leie_bil } = this.state;
 
         return (
             <>
@@ -109,7 +106,7 @@ export default class Barnehage extends React.Component {
 
                 {vis_timer_kan_du_leie_bil &&
                     <div className="form-group row col-sm-12 col-xs-12">
-                        <p>Til en timepris på 100 kroner, får du råd til å leie bil i <strong>{timer_kan_du_leie_bil}</strong> timer (<strong>{dogn_du_kan_leie_bil}</strong> døgn) for pengene du bruker på å eie bil i løpet av et år.</p>
+                        <p>Til en timepris på 100 kroner, får du råd til å leie bil i <strong>{timer_kan_du_leie_bil}</strong> timer.</p>
                     </div>
                 }
             </>
