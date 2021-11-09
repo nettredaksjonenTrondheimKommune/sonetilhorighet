@@ -8,16 +8,16 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^3.4.1",
     "file-system": "^2.2.2",
-    "node-fetch": "^2.6.1",
-    "proj4": "^2.7.4",
-    "react": "^16.13.1",
-    "react-autosuggest": "^10.0.2",
+    "node-fetch": "^2.6.6",
+    "proj4": "^2.7.5",
+    "react": "^16.14.0",
+    "react-autosuggest": "^10.1.0",
     "react-bootstrap-typeahead": "^4.2.3",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
-    "react-search-autocomplete": "^1.0.6",
-    "react-select": "^3.1.1",
-    "styled-components": "^5.2.0"
+    "react-search-autocomplete": "^1.1.0",
+    "react-select": "^3.2.0",
+    "styled-components": "^5.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,20 +44,20 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
-    "@rollup/plugin-commonjs": "^15.0.0",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-replace": "^2.3.3",
+    "@rollup/plugin-replace": "^2.4.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.59.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-postcss": "^3.1.8",
-    "rollup-plugin-terser": "^7.0.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.26.11",
-    "npm-run-all": "^4.1.5"
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
