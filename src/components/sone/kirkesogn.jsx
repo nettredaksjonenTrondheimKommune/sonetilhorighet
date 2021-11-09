@@ -9,7 +9,9 @@ export default class Kirkesogn extends Component {
         this.state = {
             adresse: '',
             altAdresse: '',
-            kirkesogn: {}
+            kirkesogn: {
+                "kirkesogn": ""
+            }
         };
     }
 
@@ -26,10 +28,10 @@ export default class Kirkesogn extends Component {
     render() {
         const { kirkesogn } = this.state;
 
-        return (kirkesogn.length === 0
-            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen kirkesogn som hører til denne adressen!</h4></div>
+        return (typeof kirkesogn.kirkesogn === 'undefined'
+            ? <div className="box bg-blue text-center"><h4>Vi finner ingen kirkesogn som hører til denne adressen!</h4></div>
             :
-            <div className="box bg-blue margin-top text-center">
+            <div className="box bg-blue">
                 <h3>Kirkesogn</h3>
                 <h4>Kontaktinformasjon</h4>
                 {kirkesogn.kirkesogn ? <p>{kirkesogn.kirkesogn}</p> : ''}

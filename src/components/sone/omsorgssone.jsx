@@ -9,7 +9,14 @@ export default class Omsorgssone extends Component {
         this.state = {
             adresse: '',
             altAdresse: '',
-            omsorgssone: {}
+            omsorgssone: {
+                "omsorgsone": "",
+                "telefon": "",
+                "epost": "",
+                "hjemmetjenesteBesoksadresse": "",
+                "lenkeHjemmetjeneste": "",
+                "epostTil": ""
+            }
         };
     }
 
@@ -26,16 +33,16 @@ export default class Omsorgssone extends Component {
     render() {
         const { omsorgssone } = this.state;
 
-        return (omsorgssone.length === 0
-            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen hjemmetjeneste som hører til denne adressen!</h4></div>
+        return (typeof omsorgssone.omsorgsone === 'undefined'
+            ? <div className="box bg-blue text-center"><h4>Vi finner ingen hjemmetjeneste som hører til denne adressen!</h4></div>
             :
-            <div className="box bg-blue margin-top text-center">
+            <div className="box bg-blue">
                 <h3>Hjemmetjeneste</h3>
                 <h4>Kontaktinformasjon</h4>
                 {omsorgssone.omsorgsone ? <p><a href={omsorgssone.lenkeHjemmetjeneste}>{omsorgssone.omsorgsone}</a></p> : ''}
                 {omsorgssone.telefon ? <p>Telefon: <a href={omsorgssone.telefon}>{omsorgssone.telefon}</a></p> : ''}
                 {omsorgssone.epost ? <p>Epost: <a href={omsorgssone.epostTil}>{omsorgssone.epost}</a></p> : ''}
-                {omsorgssone.hjemmetjenesteBesoksadresse ? <p><strong>Besøksadresse</strong><br />{omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
+                {omsorgssone.hjemmetjenesteBesoksadresse ? <p>Besøksadresse {omsorgssone.hjemmetjenesteBesoksadresse}</p> : ''}
             </div>
         )
     }

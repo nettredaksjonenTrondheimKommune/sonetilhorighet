@@ -12,17 +12,13 @@
 }
 
 .box[class*=bg-] {
-  padding: 30px;
+  padding: 2% 6% 2% 6%;
   margin-top: 30px;
 }
 
 .boks-tommekalender {
   background: #c3d9e9;
   padding: 5% 3% 5% 3%;
-}
-
-.margin-top {
-  margin-top: 2%;
 }
 
 .react-autosuggest__container {

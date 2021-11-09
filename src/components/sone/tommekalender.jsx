@@ -51,9 +51,9 @@ export default class Tommekalender extends Component {
         }
 
         return (tommeplan.length === 0
-            ? <div className="box bg-blue margin-top text-center"><h4>Vi finner ingen tømmekalender som hører til denne adressen!</h4></div>
+            ? <div className="box bg-blue text-center"><h4>Vi finner ingen tømmekalender som hører til denne adressen!</h4></div>
             :
-            <div className="box boks-tommekalender margin-top text-center">
+            <div className="box bg-blue boks-tommekalender text-center">
                 <h3>Tømmekalender</h3>
                 <div className="hidden-xs hidden-sm hidden-md">
                     <button type="button" className={filter === null ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'} onClick={() => this.setState({ filter: null })}>Vis alle</button>
@@ -71,7 +71,7 @@ export default class Tommekalender extends Component {
                     </select>
                 </div>
 
-                <table className="table table-striped margin-top hidden-xs hidden-sm">
+                <table className="table table-striped hidden-xs hidden-sm">
                     <thead>
                         <tr>
                             <th>Uke</th>

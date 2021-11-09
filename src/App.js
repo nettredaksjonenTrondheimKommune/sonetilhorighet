@@ -106,14 +106,14 @@ class App extends Component {
       placeholder: "Skriv inn adresse",
       value,
       'aria-label': "Søk",
-      'aria-labelledby': "adresseSok",
+      'id': "adressesok",
       onChange: this.onChange
     };
 
     return (
       <div className="content">
-        <div className="boks bla-boks text-center">
-          <h3 id="adresseSok">Søk opp via adressen din</h3>
+        <div className="boks bla-boks">
+          <label htmlFor="adressesok">Søk opp via adressen din</label>
           <Autosuggest
             suggestions={adresseforslag}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
