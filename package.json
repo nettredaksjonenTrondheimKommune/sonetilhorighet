@@ -1,6 +1,6 @@
 {
   "name": "sonetilhorighet",
-  "version": "1.1.24",
+  "version": "1.1.27",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -20,7 +20,7 @@
     "styled-components": "^5.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "run-s clean build:pages",
     "build:pages": "rollup -c",
     "build:zip": "node make-zip.js",
